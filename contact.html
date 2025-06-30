@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Studio Rapido</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-wrapper {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .contact-info, .contact-form {
+        flex: 1;
+      }
+
+      .contact-info {
+        padding-right: 2rem;
+      }
+    }
+
+    .contact-highlights {
+      margin-top: 1rem;
+      padding-left: 1.2rem;
+      list-style: none;
+    }
+
+    .contact-highlights li::before {
+      content: "✅";
+      margin-right: 0.5rem;
+    }
+
+    .contact-form {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 1.2rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+    body.dark-mode .contact-form {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: rgba(255, 255, 255, 0.25);
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      color: #000;
+      font-family: 'Outfit', sans-serif;
+      transition: background 0.3s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      background: rgba(255, 255, 255, 0.4);
+      outline: none;
+    }
+    body.dark-mode .contact-form input,
+    body.dark-mode .contact-form textarea,
+    body.dark-mode .contact-form select {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    .pop-check {
+      animation: pop 0.6s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+  <header>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="a-propos.html">ℹ️ À propos</a></li>
+        <li><a href="services.html">🧰 Services</a></li>
+        <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+        <li><a href="contact.html" class="active">📞 Contact & Devis</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="contact" class="scroll-reveal">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h2>📞 Me Contacter</h2>
+        <p>Tu veux lancer un projet, poser une question ou juste me faire un coucou ? Laisse-moi un message et je te répondrai rapidement avec toute l’attention que ton idée mérite.</p>
+        <ul class="contact-highlights">
+          <li>✔️ Réponse sous 24h garantie</li>
+          <li>✔️ Devis personnalisé sans engagement</li>
+          <li>✔️ Création rapide et sur-mesure</li>
+        </ul>
+      </div>
+      <form action="https://formspree.io/f/manjabor" method="POST" class="contact-form">
+        <div class="form-group">
+          <label for="name">👤 Nom</label>
+          <input type="text" name="name" id="name" placeholder="Ton prénom ou ton blaze" required />
+        </div>
+        <div class="form-group">
+          <label for="email">📧 Email</label>
+          <input type="email" name="email" id="email" placeholder="Ton adresse mail" required />
+        </div>
+        <div class="form-group">
+          <label for="projectType">🛠️ Type de projet</label>
+          <select name="projectType" id="projectType" required>
+            <option value="">Sélectionne un type</option>
+            <option value="Site vitrine">Site vitrine</option>
+            <option value="Application IA">Application IA</option>
+            <option value="Portfolio">Portfolio</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">💰 Budget estimé</label>
+          <input type="text" name="budget" id="budget" placeholder="Ex: 300€, 500€, 1000€..." />
+        </div>
+        <div class="form-group full-width">
+          <label for="message">💬 Message</label>
+          <textarea name="message" id="message" rows="5" placeholder="Balance ton message ici..." required></textarea>
+        </div>
+        <button type="submit" class="cta">📨 Envoyer le message</button>
+        <div id="confirmation-check" style="display: none; text-align: center; font-size: 2rem; color: #10b981; margin-top: 1rem;">✅ Message envoyé !</div>
+      </form>
+    </div>
+    <div id="form-message" style="display:none; color: #10b981; margin-top: 1rem; font-weight: 600;">
+      Merci, ton message a bien été envoyé 👌
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>🚀 Merci de ta visite !</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/studio.rapido?igsh=MWg5a3o3eThiMDl0eA%3D%3D&utm_source=qr">📸 Instagram</a> | <a href="https://www.tiktok.com/@studio.rapido?_t=ZN-8xcQ7gPmRjq&_r=1">🎵 TikTok</a>
+    </div>
+    <p style="margin-top: 1rem;">© 2025 Studio Rapido — Tous droits réservés.</p>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    ScrollReveal().reveal('section', {
+      distance: '50px',
+      duration: 800,
+      easing: 'ease-in-out',
+      origin: 'bottom',
+      interval: 200
+    });
+
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('nav ul');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+
+    const darkToggle = document.getElementById('darkModeToggle');
+
+    // Appliquer le thème sombre si enregistré
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
+    }
+
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+    document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
+
+    const form = document.querySelector('#contact form');
+    const message = document.getElementById('form-message');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+          message.style.display = 'block';
+          const check = document.getElementById('confirmation-check');
+          check.style.display = 'block';
+          check.classList.add('pop-check');
+          setTimeout(() => check.style.display = 'none', 4000);
+        } else {
+          alert("Une erreur est survenue. Réessaie plus tard.");
+        }
+      });
+    });
+  </script>
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => loader.style.display = 'none', 500);
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    "particles": {
+      "number": { "value": 50 },
+      "size": { "value": 3 },
+      "color": { "value": "#38bdf8" },
+      "line_linked": {
+        "enable": true,
+        "color": "#38bdf8"
+      }
+    },
+    "interactivity": {
+      "events": {
+        "onhover": { "enable": true, "mode": "repulse" }
+      }
+    }
+  });
+</script>
+</body>
+</html>

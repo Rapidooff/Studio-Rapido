@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>À propos - Studio Rapido</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    :root {
+      --welcome-bg: #ffffff;
+      --text-color: #0f172a;
+    }
+
+    body.dark-mode {
+      --welcome-bg: #1e293b;
+      --text-color: #ffffff; /* Modifié depuis #f1f5f9 */
+    }
+    body.dark-mode .welcome-content h1,
+    body.dark-mode .welcome-content p {
+      color: #ffffff !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+  <header>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="active">🏠 Accueil</a></li>
+        <li><a href="a-propos.html">ℹ️ À propos</a></li>
+        <li><a href="services.html">🧰 Services</a></li>
+        <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+        <li><a href="contact.html">📞 Contact & Devis</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>Studio Rapido</h1>
+      <p>L’univers créatif, intelligent et animé.</p>
+      <a href="#welcome" class="cta">✨ Entrer dans l’univers</a>
+    </div>
+  </section>
+
+  <section id="welcome" class="scroll-right">
+    <div class="welcome-overlay">
+      <div class="welcome-content">
+        <h1>👋 Bienvenue chez Studio Rapido</h1>
+        <p>Créateur de sites modernes, d’univers animés et d’IA sur mesure.</p>
+        <a href="a-propos.html" class="cta">🔎 Découvrir À propos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="zoom-in">
+    <h2>🧪 Nos technologies</h2>
+    <p>Nous utilisons des outils modernes pour créer des expériences immersives : HTML5, CSS3, JavaScript, IA, animations Web et plus encore.</p>
+  </section>
+
+  <section class="fade-in">
+    <h2>🎯 Notre mission</h2>
+    <p>Offrir à chacun un univers web interactif, intelligent et sur-mesure. Studio Rapido conçoit, développe et sublime vos idées numériques.</p>
+  </section>
+
+  <section id="stats" class="stats-section fade-in">
+    <div class="stat">
+      <div class="counter" data-target="27">0</div>
+      <p class="counter-label">🚀 Sites publiés</p>
+    </div>
+    <div class="stat">
+      <div class="counter" data-target="9">0</div>
+      <p class="counter-label">🧠 IA intégrées</p>
+    </div>
+    <div class="stat">
+      <div class="counter" data-target="17">0</div>
+      <p class="counter-label">🎨 Univers graphiques créés</p>
+    </div>
+    <div class="stat">
+      <div class="counter" data-target="4">0</div>
+      <p class="counter-label">📱 Prototypes iOS</p>
+    </div>
+    <div class="stat">
+      <div class="counter" data-target="6">0</div>
+      <p class="counter-label">🛠️ Projets freelance</p>
+    </div>
+    <div class="stat">
+      <div class="counter" data-target="10">0</div>
+      <p class="counter-label">🧩 Templates créés</p>
+    </div>
+  </section>
+
+  <section class="stats-explanation fade-in">
+    <h2>📊 Explication des statistiques</h2>
+    <details>
+      <summary>🚀 Sites publiés</summary>
+      <p>Sites mis en ligne : portfolio, projets clients, démos, etc. Montre ta maîtrise du déploiement web.</p>
+    </details>
+    <details>
+      <summary>🧠 IA intégrées</summary>
+      <p>Intégration d'intelligences artificielles comme ChatGPT, assistants vocaux, IA locales (LLaMA, Mistral), etc.</p>
+    </details>
+    <details>
+      <summary>🎨 Univers graphiques créés</summary>
+      <p>Création d'interfaces, animations, effets, dark mode, design UI/UX immersif avec ta propre touche artistique.</p>
+    </details>
+    <details>
+      <summary>📱 Prototypes iOS</summary>
+      <p>Projets développés sur Xcode (SwiftUI) incluant des assistants, animations, UI futuristes et domotique.</p>
+    </details>
+    <details>
+      <summary>🛠️ Projets freelance</summary>
+      <p>Sites vitrine, refonte visuelle, projets clients en auto-entreprise avec maquettes, devis et livraison.</p>
+    </details>
+    <details>
+      <summary>🧩 Templates créés</summary>
+      <p>Composants HTML/CSS/JS réutilisables : boutons animés, menus, sections stylées, dark mode, etc.</p>
+    </details>
+  </section>
+
+  <footer class="site-footer">
+    <p>🚀 Merci de ta visite !</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/studio.rapido?igsh=MWg5a3o3eThiMDl0eA%3D%3D&utm_source=qr">📸 Instagram</a> | <a href="https://www.tiktok.com/@studio.rapido?_t=ZN-8xcQ7gPmRjq&_r=1">🎵 TikTok</a>
+    </div>
+    <p style="margin-top: 1rem;">© 2025 Studio Rapido — Tous droits réservés.</p>
+  </footer>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+  ScrollReveal().reveal('section', {
+    distance: '50px',
+    duration: 800,
+    easing: 'ease-in-out',
+    origin: 'bottom',
+    interval: 200
+  });
+
+</script>
+<script>
+  // Scroll fluide vers le haut pour le bouton Accueil
+  const accueilBtn = document.querySelector('a[href="#"]');
+  accueilBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+<script>
+  const darkToggle = document.getElementById('darkModeToggle');
+
+  // Appliquer le thème sombre si enregistré
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+
+  document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
+
+  darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
+    if (document.body.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+  particlesJS("particles-js", {
+    "particles": {
+      "number": { "value": 50 },
+      "size": { "value": 3 },
+      "color": { "value": "#38bdf8" },
+      "line_linked": {
+        "enable": true,
+        "color": "#38bdf8"
+      }
+    },
+    "interactivity": {
+      "events": {
+        "onhover": { "enable": true, "mode": "repulse" }
+      }
+    }
+  });
+</script>
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => loader.style.display = 'none', 500);
+  });
+</script>
+<script>
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      let count = 0;
+      const speed = target / 60;
+
+      const update = () => {
+        count += speed;
+        if (count < target) {
+          el.textContent = Math.floor(count);
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target;
+        }
+      };
+      update();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll('.counter');
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(counter => {
+        observer.observe(counter);
+      });
+    });
+  </script>
+  <div id="aurion-toggle" class="aurion-toggle">🤖</div>
+  <div id="aurion-assistant" class="aurion-assistant hidden">
+    <div class="aurion-header">
+      <h3 style="font-size: 1.6rem; font-weight: 700; color: #0ea5e9;">Aurion.ia</h3>
+      <p>Besoin d’aide pour explorer le site ?</p>
+    </div>
+    <div class="aurion-options">
+      <button onclick="navigateTo('contact')">📨 Demander un devis</button>
+      <button onclick="navigateTo('services')">🔧 Voir les services</button>
+      <button onclick="navigateTo('portfolio')">🖼️ Voir le portfolio</button>
+      <button onclick="showFAQ()">❓ Foire aux questions</button>
+    </div>
+    <div class="aurion-faq hidden" id="aurion-faq">
+      <p><strong>FAQ :</strong></p>
+      <ul>
+        <li><strong>🧠 Quels services proposez-vous ?</strong><br/>Sites vitrines, IA, animations, prototypes iOS…</li>
+        <li><strong>📦 Est-ce responsive ?</strong><br/>Oui, chaque projet est mobile-first et adapté à tous les écrans.</li>
+        <li><strong>🕒 Délais moyens ?</strong><br/>Entre 2 jours et 2 semaines selon le projet.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+<style>
+  .aurion-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #38bdf8;
+    color: white;
+    font-size: 1.6rem;
+    border-radius: 50%;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .aurion-assistant {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    width: 280px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    z-index: 9999;
+    padding: 1rem;
+    font-family: 'Outfit', sans-serif;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .aurion-header h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0ea5e9;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .aurion-header p {
+    font-size: 0.9rem;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+
+  .aurion-options button {
+    display: block;
+    width: 100%;
+    background: #0ea5e9;
+    color: white;
+    padding: 0.6rem;
+    margin: 0.3rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 600;
+  }
+
+  .aurion-options button:hover {
+    background: #0284c7;
+  }
+
+  .aurion-faq {
+    font-size: 0.85rem;
+    color: #1e293b;
+    margin-top: 1rem;
+  }
+
+  .aurion-faq ul {
+    padding-left: 1rem;
+  }
+
+  .aurion-faq li {
+    margin-bottom: 0.5rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  body.dark-mode .aurion-assistant {
+    background: #1e293b;
+    color: white;
+  }
+
+  body.dark-mode .aurion-header p,
+  body.dark-mode .aurion-faq {
+    color: #ffffff;
+  }
+
+  body.dark-mode .aurion-options button {
+    background: #38bdf8;
+  }
+
+  body.dark-mode .aurion-options button:hover {
+    background: #0ea5e9;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+<script>
+  const aurionBtn = document.getElementById('aurion-toggle');
+  const aurionBox = document.getElementById('aurion-assistant');
+  const faq = document.getElementById('aurion-faq');
+
+  aurionBtn.addEventListener('click', () => {
+    aurionBox.classList.toggle('hidden');
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!aurionBox.contains(e.target) && !aurionBtn.contains(e.target)) {
+      aurionBox.classList.add('hidden');
+    }
+  });
+
+  function navigateTo(page) {
+    const pages = {
+      contact: 'contact.html',
+      services: 'services.html',
+      portfolio: 'portfolio.html'
+    };
+    window.location.href = pages[page];
+  }
+
+  function showFAQ() {
+    faq.classList.toggle('hidden');
+  }
+</script>
+</body>
+</style>
+<style>
+.assistant-bubble {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #38bdf8;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  padding: 0.8rem;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+.assistant-bubble:hover {
+  transform: scale(1.1);
+}
+
+.assistant-panel {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  z-index: 1000;
+  width: 250px;
+  font-family: 'Outfit', sans-serif;
+}
+.assistant-panel p {
+  margin-bottom: 0.8rem;
+  color: #0f172a;
+  font-weight: 600;
+}
+.assistant-panel button {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.6rem;
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.assistant-panel button:hover {
+  background: #0284c7;
+}
+
+body.dark-mode .assistant-panel {
+  background: #1e293b;
+  color: white;
+}
+body.dark-mode .assistant-panel p {
+  color: #ffffff;
+}
+body.dark-mode .assistant-panel button {
+  background: #38bdf8;
+}
+body.dark-mode .assistant-panel button:hover {
+  background: #0ea5e9;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+<style>
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(226, 232, 240, 0)),
+                url('./assets/bg-light.png') center/cover no-repeat;
+    backdrop-filter: blur(3px);
+    text-align: center;
+    z-index: 10;
+    padding: 0 2rem;
+  }
+
+  body.dark-mode .hero {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 1), rgba(15, 23, 42, 0)),
+                url('./assets/bg-dark.png') center/cover no-repeat;
+    backdrop-filter: blur(3px);
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    color: #0f172a;
+  }
+
+  .hero p {
+    font-size: 1.4rem;
+    color: #334155;
+    font-family: 'Outfit', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+  }
+
+  body.dark-mode .hero p {
+    color: #f1f5f9;
+  }
+
+  .hero .cta {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(to right, #38bdf8, #0ea5e9);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .hero .cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+  }
+</style>
+<style>
+  .stats-explanation {
+    background: var(--welcome-bg);
+    color: var(--text-color);
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 1.2rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .stats-explanation h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .stats-explanation details {
+    margin-bottom: 1rem;
+    background: rgba(0,0,0,0.03);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .stats-explanation summary {
+    font-weight: bold;
+    font-size: 1.1rem;
+    outline: none;
+  }
+
+  .stats-explanation p {
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+
+  body.dark-mode .stats-explanation {
+    background: #1e293b;
+    color: #ffffff;
+  }
+
+  body.dark-mode .stats-explanation details {
+    background: rgba(255, 255, 255, 0.05);
+  }
+</style>
+<style>
+#welcome {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-overlay {
+  position: relative;
+  z-index: 1;
+  background: var(--welcome-bg);
+  padding: 4rem 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.dark-mode .welcome-overlay {
+  background: var(--welcome-bg);
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 700px;
+  width: 100%;
+  color: var(--text-color);
+  z-index: 2;
+}
+
+.welcome-content h1,
+.welcome-content p {
+  color: var(--text-color);
+}
+</style>
+<style>
+.site-footer {
+  background: rgba(15, 23, 42, 0.9);
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'Outfit', sans-serif;
+}
+
+.site-footer a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 0.5rem;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+  color: #0ea5e9;
+}
+</style>
+<style>
+.stats-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  padding: 5rem 2rem;
+  background: var(--welcome-bg);
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  min-width: 120px;
+}
+
+.counter {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.counter-label {
+  font-size: 1rem;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+}
+</style>
+</script>
+<script>
+  const bubble = document.getElementById('assistant-bubble');
+  const panel = document.getElementById('assistant-panel');
+
+  bubble.addEventListener('click', () => {
+    panel.classList.toggle('hidden');
+  });
+
+  // Fermer le panneau si clic en dehors
+  document.addEventListener('click', function(e) {
+    if (!bubble.contains(e.target) && !panel.contains(e.target)) {
+      panel.classList.add('hidden');
+    }
+  });
+</script>
+</html>
+  body.dark-mode .aurion-header h3 {
+    color: #38bdf8;
+  }
