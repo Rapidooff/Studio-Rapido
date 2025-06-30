@@ -1,7 +1,7 @@
 body.dark-mode {
   background: #0f172a;
   color: #e2e8f0;
-  background-image: url('A_high-resolution_digital_photograph_displays_line.png');
+  background-image: url('./assets/bg-dark.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -22,7 +22,7 @@ body.dark-mode nav {
 }
 
 body.dark-mode nav a {
-  color: #cbd5e1;
+  color: #2470ea;
 }
 
 body.dark-mode nav a:hover,
@@ -54,7 +54,7 @@ body {
   background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
   color: #1e293b;
   line-height: 1.6;
-  background-image: url('A_digital_artwork_showcases_lines_of_programming_c.png');
+  background-image: url('./assets/bg-light.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -78,12 +78,49 @@ header {
 
 nav ul {
   list-style: none;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   gap: 2rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
   transition: all 0.3s ease-in-out;
+}
+
+/* Désactivation temporaire des animations invisibles si JS n’est pas prêt */
+/*
+section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+*/
+
+section {
+  padding: 5rem 2rem;
+  background: rgba(255, 255, 255, 0.97);
+  color: #0f172a;
+  border-radius: 20px;
+  margin: 3rem auto;
+  max-width: 1000px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.03);
+  text-align: center;
+  backdrop-filter: blur(6px) saturate(180%);
+  border: 1px solid rgba(14, 165, 233, 0.08);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  font-weight: 700;
 }
 
 nav a {
@@ -133,27 +170,6 @@ nav a:focus {
 }
 
 /* Sections */
-section {
-  padding: 5rem 2rem;
-  background: rgba(255, 255, 255, 0.97);
-  color: #0f172a;
-  border-radius: 20px;
-  margin: 3rem auto;
-  max-width: 1000px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.03);
-  text-align: center;
-  backdrop-filter: blur(6px) saturate(180%);
-  border: 1px solid rgba(14, 165, 233, 0.08);
-  opacity: 1;
-  transform: translateY(0);
-}
-
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  letter-spacing: -0.5px;
-  font-weight: 700;
-}
 
 .services-list {
   list-style: none;
@@ -231,7 +247,7 @@ footer .socials {
 /* Responsive */
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: row;
     display: none;
     background: rgba(255, 255, 255, 0.95);
     padding: 1rem;
@@ -250,7 +266,7 @@ footer .socials {
 nav {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.9);
+  background: transparent;
   color: #1e293b;
   backdrop-filter: blur(8px);
   padding: 1rem 2rem;
@@ -276,19 +292,6 @@ nav {
 
 .menu-toggle:hover {
   transform: scale(1.1);
-}
-
-/* Animation au scroll : fade + slide depuis le bas */
-section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
-}
-
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 #particles-js {
@@ -357,7 +360,7 @@ section.visible {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(226, 232, 240, 0.6)),
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(226, 232, 240, 0.85)),
               url('./assets/bg-light.png') center/cover no-repeat;
   backdrop-filter: blur(6px);
   text-align: center;
@@ -454,7 +457,7 @@ nav a.active {
   align-items: center;
   justify-content: center;
   padding: 5rem 2rem;
-  background: white;
+  background: transparent;
   color: inherit;
   border-radius: 20px;
   margin: 3rem auto;
@@ -469,16 +472,18 @@ nav a.active {
 
 body.dark-mode #welcome {
   background: #1e293b;
-  color: #e2e8f0;
+  color: #1e293b;
   border: 1px solid rgba(59, 130, 246, 0.15);
 }
 /* Ensure heading and text in welcome section are visible in light mode */
 #welcome h1 {
   color: #0f172a;
+  font-weight: 700;
 }
 
 #welcome p {
   color: #334155;
+  font-weight: 600;
 }
 #Stats Section
 .stats-section {
@@ -523,5 +528,11 @@ body.dark-mode .stats-section {
 
 body.dark-mode .counter,
 body.dark-mode .counter-label {
-  color: #e2e8f0;
+  color: #000000;
+}
+
+@media (max-width: 768px) {
+  body.dark-mode nav ul {
+    background: transparent;
+  }
 }

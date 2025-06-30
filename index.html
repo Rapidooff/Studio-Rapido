@@ -35,7 +35,7 @@
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav class="main-nav">
       <ul>
-        <li><a href="#" class="active">🏠 Accueil</a></li>
+        <li><a href="index.html" class="active">🏠 Accueil</a></li>
         <li><a href="a-propos.html">ℹ️ À propos</a></li>
         <li><a href="services.html">🧰 Services</a></li>
         <li><a href="portfolio.html">🖼️ Portfolio</a></li>
@@ -45,9 +45,14 @@
   </header>
 
   <section id="hero" class="hero">
+    <div class="hero-background"></div>
     <div class="hero-content">
-      <h1>Studio Rapido</h1>
-      <p>L’univers créatif, intelligent et animé.</p>
+      <h1 style="font-size: 3.2rem; font-weight: 700; font-family: 'Outfit', sans-serif; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); color: var(--text-color);">
+        🚀 Studio Rapido
+      </h1>
+      <p style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 500; color: var(--text-color); text-shadow: 1px 1px 3px rgba(0,0,0,0.3); letter-spacing: 0.5px; font-style: italic;">
+        Ton univers digital sur-mesure : design animé, code intelligent & projets stylés.
+      </p>
       <a href="#welcome" class="cta">✨ Entrer dans l’univers</a>
     </div>
   </section>
@@ -55,21 +60,29 @@
   <section id="welcome" class="scroll-right">
     <div class="welcome-overlay">
       <div class="welcome-content">
-        <h1>👋 Bienvenue chez Studio Rapido</h1>
-        <p>Créateur de sites modernes, d’univers animés et d’IA sur mesure.</p>
+        <h1 style="font-size: 2.8rem; font-weight: 700; font-family: 'Outfit', sans-serif; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); color: var(--text-color);">
+          👋 Bienvenue chez Studio Rapido
+        </h1>
+        <p style="font-size: 1.6rem; font-weight: 500; font-style: italic; font-family: 'Outfit', sans-serif; color: var(--text-color); text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
+          Créateur de sites modernes, d’univers animés et d’IA sur mesure.
+        </p>
         <a href="a-propos.html" class="cta">🔎 Découvrir À propos</a>
       </div>
     </div>
   </section>
 
   <section class="zoom-in">
-    <h2>🧪 Nos technologies</h2>
-    <p>Nous utilisons des outils modernes pour créer des expériences immersives : HTML5, CSS3, JavaScript, IA, animations Web et plus encore.</p>
+    <h2 style="font-size: 2.4rem; font-weight: 700; font-family: 'Outfit', sans-serif; color: var(--text-color); text-shadow: 1px 1px 4px rgba(0,0,0,0.2);">🧪 Nos technologies</h2>
+    <p style="font-size: 1.4rem; font-family: 'Outfit', sans-serif; color: var(--text-color); font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+      Nous utilisons des outils modernes pour créer des expériences immersives : HTML5, CSS3, JavaScript, IA, animations Web et plus encore.
+    </p>
   </section>
 
   <section class="fade-in">
-    <h2>🎯 Notre mission</h2>
-    <p>Offrir à chacun un univers web interactif, intelligent et sur-mesure. Studio Rapido conçoit, développe et sublime vos idées numériques.</p>
+    <h2 style="font-size: 2.4rem; font-weight: 700; font-family: 'Outfit', sans-serif; color: var(--text-color); text-shadow: 1px 1px 4px rgba(0,0,0,0.2);">🎯 Notre mission</h2>
+    <p style="font-size: 1.4rem; font-family: 'Outfit', sans-serif; color: var(--text-color); font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+      Offrir à chacun un univers web interactif, intelligent et sur-mesure. Studio Rapido conçoit, développe et sublime vos idées numériques.
+    </p>
   </section>
 
   <section id="stats" class="stats-section fade-in">
@@ -127,6 +140,8 @@
     </details>
   </section>
 
+
+
   <footer class="site-footer">
     <p>🚀 Merci de ta visite !</p>
     <div class="socials">
@@ -147,11 +162,16 @@
 </script>
 <script>
   // Scroll fluide vers le haut pour le bouton Accueil
-  const accueilBtn = document.querySelector('a[href="#"]');
-  accueilBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  const accueilBtn = document.querySelector('a[href="index.html"]');
+  if (accueilBtn) {
+    accueilBtn.addEventListener('click', function(e) {
+      // Si déjà sur index.html, scroll to top
+      if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
 </script>
 <script>
   const darkToggle = document.getElementById('darkModeToggle');
@@ -466,18 +486,28 @@ body.dark-mode .assistant-panel button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(226, 232, 240, 0)),
-                url('./assets/bg-light.png') center/cover no-repeat;
-    backdrop-filter: blur(3px);
     text-align: center;
     z-index: 10;
     padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  body.dark-mode .hero {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 1), rgba(15, 23, 42, 0)),
-                url('./assets/bg-dark.png') center/cover no-repeat;
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(226, 232, 240, 0.85)),
+                url('./assets/bg-light.png') center/cover no-repeat;
+    z-index: 0;
     backdrop-filter: blur(3px);
+  }
+
+  body.dark-mode .hero-background {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.85)),
+                url('./assets/bg-dark.png') center/cover no-repeat;
   }
 
   .hero-content {
@@ -486,25 +516,35 @@ body.dark-mode .assistant-panel button:hover {
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
+    position: relative;
+    z-index: 1;
   }
 
   .hero h1 {
-    font-size: 3rem;
-    color: #0f172a;
+    font-size: 3.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
   }
 
   .hero p {
-    font-size: 1.4rem;
-    color: #334155;
-    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
     font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-weight: 500;
     line-height: 1.6;
+    color: var(--text-color);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   body.dark-mode .hero p {
     color: #f1f5f9;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  body.dark-mode .hero h1 {
+    color: #ffffff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
   }
 
   .hero .cta {
@@ -526,12 +566,16 @@ body.dark-mode .assistant-panel button:hover {
 <style>
   .stats-explanation {
     background: var(--welcome-bg);
-    color: var(--text-color);
+    color: #0f172a;
     padding: 3rem 2rem;
     max-width: 900px;
     margin: 0 auto;
     border-radius: 1.2rem;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  body.dark-mode .stats-explanation {
+    color: #ffffff;
   }
 
   .stats-explanation h2 {
@@ -650,19 +694,25 @@ body.dark-mode .welcome-overlay {
   min-width: 120px;
 }
 
-.counter {
-  font-size: 3rem;
-  font-weight: bold;
-  color: var(--text-color);
-}
+  .counter {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  body.dark-mode .counter {
+    color: #ffffff !important;
+  }
 
-.counter-label {
-  font-size: 1rem;
-  color: var(--text-color);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 0.5rem;
-}
+  .counter-label {
+    font-size: 1rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+  }
+  body.dark-mode .counter-label {
+    color: #ffffff !important;
+  }
 </style>
 </script>
 <script>
