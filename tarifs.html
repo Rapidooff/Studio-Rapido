@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>À propos - Studio Rapido</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .tarif-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      margin: 2rem 0;
+    }
+
+    .tarif-content.active {
+      max-height: 1000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tarif-content h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .tarif-content h3 {
+      margin-top: 0;
+      font-weight: normal;
+      color: var(--text-color);
+    }
+
+    .tarif-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tarif-content ul li::before {
+      content: "✅";
+      margin-right: 0.5rem;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    /* Style amélioré pour les boutons .tab-btn */
+    .tarif-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .tab-btn {
+      background-color: transparent;
+      border: 2px solid var(--text-color);
+      color: var(--text-color);
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .tab-btn.active {
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #f97316;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      margin-left: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div id="loader"><div class="spinner"></div></div>
+  <header>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="a-propos.html" class="active">ℹ️ À propos</a></li>
+        <li><a href="services.html">🧰 Services</a></li>
+        <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+        <li><a href="tarifs.html">💰 Tarifs</a></li>
+        <li><a href="contact.html">📞 Contact & Devis</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="tarifs">
+    <div class="hero-content">
+      <h1>💰 Nos Formules</h1>
+      <p>Chez Studio Rapido, on t'offre trois formules adaptées à tous les projets, du plus simple au plus ambitieux.</p>
+
+      <div class="tarif-tabs">
+        <button class="tab-btn active" data-target="starter">Starter</button>
+        <button class="tab-btn" data-target="pro">Pro</button>
+        <button class="tab-btn" data-target="surmesure">Sur-Mesure</button>
+        <button class="tab-btn" data-target="ultra">Ultra</button>
+      </div>
+
+      <div class="tarif-content active" id="starter">
+        <h2>🚀 Formule Starter</h2>
+        <h3>L’essentiel pour une présence rapide et pro</h3>
+        <ul>
+          <li> Page vitrine moderne et responsive</li>
+          <li> Design sur mesure cohérent avec ton univers</li>
+          <li> Formulaire de contact fonctionnel</li>
+          <li> Animation d’entrée simple (ScrollReveal)</li>
+          <li> Intégration express sous 72h</li>
+          <li> Support post-livraison 7 jours</li>
+        </ul>
+        <p class="price"><strong>À partir de 199€</strong></p>
+        <div style="margin-top: 1rem;">
+          <a href="contact.html?type=Starter" class="cta">Choisir cette formule</a>
+        </div>
+      </div>
+
+      <div class="tarif-content" id="pro">
+        <h2>⚡ Formule Pro</h2>
+        <h3>Un site complet et performant</h3>
+        <ul>
+          <li> 3 à 5 pages entièrement personnalisées</li>
+          <li> Blog intégré (optionnel)</li>
+          <li> SEO standard pour être visible sur Google</li>
+          <li> Formulaires avancés (devis, inscription…)</li>
+          <li> Design UX/UI propre + animations</li>
+          <li> Responsive mobile / tablette</li>
+          <li> Livraison sous 7 jours</li>
+        </ul>
+        <p class="price"><strong>À partir de 499€</strong></p>
+        <div style="margin-top: 1rem;">
+          <a href="contact.html?type=Pro" class="cta">Choisir cette formule</a>
+        </div>
+      </div>
+
+      <div class="tarif-content" id="surmesure">
+        <h2>🎨 Formule Sur-Mesure</h2>
+        <h3>Un site unique pensé pour ton business</h3>
+        <ul>
+          <li> Design graphique sur mesure</li>
+          <li> Intégration d’animations avancées (particles, transitions…)</li>
+          <li> Développement de modules spécifiques (ex : carte interactive, catalogue…)</li>
+          <li> Connexion API ou Firebase si besoin</li>
+          <li> Référencement naturel optimisé</li>
+          <li> Maintenance 1 mois incluse</li>
+        </ul>
+        <p class="price"><strong>À partir de 699€</strong></p>
+        <div style="margin-top: 1rem;">
+          <a href="contact.html?type=Sur-Mesure" class="cta">Choisir cette formule</a>
+        </div>
+      </div>
+
+      <div class="tarif-content" id="ultra">
+        <h2>🌟 Formule Ultra <span class="badge">🔥 Populaire</span></h2>
+        <h3>Le tout-en-un pour une image premium</h3>
+        <ul>
+          <li> Site complet 5+ pages + blog</li>
+          <li> UI/UX haut de gamme avec animations dynamiques</li>
+          <li> Assistant IA / Chatbot intégré</li>
+          <li> Formulaires + newsletters + tracking</li>
+          <li> SEO + vitesse + sécurité optimisée</li>
+          <li> Maintenance 3 mois et accompagnement</li>
+          <li> Option vitrine multilingue ou landing campagne</li>
+        </ul>
+        <p class="price"><strong>À partir de 899€</strong></p>
+        <div style="margin-top: 1rem;">
+          <a href="contact.html?type=Ultra" class="cta">Choisir cette formule</a>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="contact.html" class="cta">📩 Demander un devis</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>🚀 Merci de ta visite !</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/studio.rapido?igsh=MWg5a3o3eThiMDl0eA%3D%3D&utm_source=qr">📸 Instagram</a> | <a href="https://www.tiktok.com/@studio.rapido?_t=ZN-8xcQ7gPmRjq&_r=1">🎵 TikTok</a>
+    </div>
+    <p style="margin-top: 1rem;">© 2025 Studio Rapido — Tous droits réservés.</p>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    ScrollReveal().reveal('section', {
+      distance: '50px',
+      duration: 800,
+      easing: 'ease-in-out',
+      origin: 'bottom',
+      interval: 200
+    });
+    document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('nav ul');
+    toggle.addEventListener('click', () => nav.classList.toggle('show'));
+    const darkToggle = document.getElementById('darkModeToggle');
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      loader.style.opacity = '0';
+      loader.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => loader.style.display = 'none', 500);
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 50 },
+        "size": { "value": 3 },
+        "color": { "value": "#38bdf8" },
+        "line_linked": {
+          "enable": true,
+          "color": "#38bdf8"
+        }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" }
+        }
+      }
+    });
+  </script>
+  <script src="script.js" defer></script>
+  <script>
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tarif-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        contents.forEach(content => {
+          if (content.id === target) {
+            content.classList.add('active');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          } else {
+            content.classList.remove('active');
+            content.style.maxHeight = null;
+          }
+        });
+      });
+    });
+
+    window.addEventListener('load', () => {
+      contents.forEach(content => {
+        if (content.classList.contains('active')) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

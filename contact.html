@@ -102,6 +102,7 @@
         <li><a href="a-propos.html">ℹ️ À propos</a></li>
         <li><a href="services.html">🧰 Services</a></li>
         <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+        <li><a href="tarifs.html">💰 Tarifs</a></li>
         <li><a href="contact.html" class="active">📞 Contact & Devis</a></li>
       </ul>
     </nav>
@@ -119,6 +120,7 @@
         </ul>
       </div>
       <form action="https://formspree.io/f/manjabor" method="POST" class="contact-form">
+        <div id="formula-selected" style="display: none; background: rgba(56,189,248,0.2); border-left: 5px solid #38bdf8; padding: 1rem; border-radius: 0.8rem; margin-bottom: 1rem; font-weight: 600;"></div>
         <div class="form-group">
           <label for="name">👤 Nom</label>
           <input type="text" name="name" id="name" placeholder="Ton prénom ou ton blaze" required />
@@ -130,17 +132,18 @@
         <div class="form-group">
           <label for="projectType">🛠️ Type de projet</label>
           <select name="projectType" id="projectType" required>
-            <option value="">Sélectionne un type</option>
-            <option value="Site vitrine">Site vitrine</option>
-            <option value="Application IA">Application IA</option>
-            <option value="Portfolio">Portfolio</option>
-            <option value="Autre">Autre</option>
+            <option value="">Sélectionne une formule</option>
+            <option value="Starter">🚀 Formule Starter</option>
+            <option value="Pro">⚡ Formule Pro</option>
+            <option value="Sur-Mesure">🎨 Formule Sur-Mesure</option>
+            <option value="Ultra">🌟 Formule Ultra</option>
+            <option value="Autre">❓ Autre / Personnalisé</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="budget">💰 Budget estimé</label>
-          <input type="text" name="budget" id="budget" placeholder="Ex: 300€, 500€, 1000€..." />
+          <input type="text" name="budget" id="budget" placeholder="Ex: 300€, 500€, 1000€..." readonly />
         </div>
         <div class="form-group full-width">
           <label for="message">💬 Message</label>
@@ -218,6 +221,61 @@
           alert("Une erreur est survenue. Réessaie plus tard.");
         }
       });
+    });
+
+    // Remplissage automatique du budget estimé selon la formule sélectionnée
+    const projectSelect = document.getElementById('projectType');
+    const budgetInput = document.getElementById('budget');
+
+    const priceMap = {
+      "Starter": "199€",
+      "Pro": "499€",
+      "Sur-Mesure": "699€",
+      "Ultra": "899€"
+    };
+
+    projectSelect.addEventListener('change', () => {
+      const selected = projectSelect.value;
+      if (priceMap[selected]) {
+        budgetInput.value = priceMap[selected];
+        budgetInput.readOnly = true;
+      } else {
+        budgetInput.value = '';
+        budgetInput.readOnly = false;
+      }
+    });
+
+    // Préremplir le champ type de projet depuis l'URL
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedType = urlParams.get('type');
+      if (selectedType) {
+        const optionToSelect = Array.from(projectSelect.options).find(opt => opt.value === selectedType);
+        if (optionToSelect) {
+          projectSelect.value = selectedType;
+          projectSelect.dispatchEvent(new Event('change'));
+        }
+      }
+    });
+  </script>
+  <script>
+    // Affichage dynamique du message de formule choisie
+    document.addEventListener('DOMContentLoaded', () => {
+      // Récupérer le paramètre "type" dans l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedType = urlParams.get('type');
+      const messageBanner = document.getElementById('formula-selected');
+      const formulaLabels = {
+        "Starter": "🚀 Formule Starter",
+        "Pro": "⚡ Formule Pro",
+        "Sur-Mesure": "🎨 Formule Sur-Mesure",
+        "Ultra": "🌟 Formule Ultra"
+      };
+
+      if (selectedType && formulaLabels[selectedType]) {
+        messageBanner.innerText = `Tu as choisi la ${formulaLabels[selectedType]} — on a déjà tout prérempli pour toi 👌`;
+        messageBanner.style.display = 'block';
+      }
     });
   </script>
 <script>
