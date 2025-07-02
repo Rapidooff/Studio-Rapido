@@ -269,8 +269,9 @@
   <div id="aurion-toggle" class="aurion-toggle">🤖</div>
   <div id="aurion-assistant" class="aurion-assistant hidden">
     <div class="aurion-header">
-      <h3 style="font-size: 1.6rem; font-weight: 700; color: #0ea5e9;">Aurion.ia</h3>
-      <p>Besoin d’aide pour explorer le site ?</p>
+      <h3 style="font-size: 1.6rem; font-weight: 700; color: #0ea5e9;">Aurion.ia v2.1</h3>
+      <p>Assistant IA mis à jour : navigation rapide, devis intelligents, synchronisation avec les formules et FAQ dynamique.</p>
+      <p style="color: #10b981; font-size: 0.85rem; font-weight: 600; margin-top: 0.3rem;">🆕 Nouvelle formule Ultra+ disponible depuis juillet !</p>
     </div>
     <div class="aurion-options">
       <button onclick="navigateTo('contact')">📨 Demander un devis</button>
@@ -284,8 +285,11 @@
         <li><strong>🧠 Quels services proposez-vous ?</strong><br/>Sites vitrines, IA, animations, prototypes iOS…</li>
         <li><strong>📦 Est-ce responsive ?</strong><br/>Oui, chaque projet est mobile-first et adapté à tous les écrans.</li>
         <li><strong>🕒 Délais moyens ?</strong><br/>Entre 2 jours et 2 semaines selon le projet.</li>
+        <li><strong>🧾 Comment demander un devis ?</strong><br/>Clique sur le bouton "Demander un devis" ou va sur la page Contact.</li>
+        <li><strong>🧠 Aurion est-il à jour ?</strong><br/>Oui, il est synchronisé avec toutes les dernières fonctionnalités du site.</li>
       </ul>
     </div>
+    <input type="text" placeholder="Pose ta question à Aurion" onkeydown="if(event.key==='Enter')askAurion(this.value)" style="width: 100%; padding: 0.5rem; border-radius: 0.5rem; margin-top: 0.6rem;"/>
   </div>
   <section class="seo-image">
     <img src="assets/logo-seo.png" alt="Logo Studio Rapido" width="512" height="512" style="display:none;" />
@@ -420,6 +424,70 @@
   function showFAQ() {
     faq.classList.toggle('hidden');
   }
+
+  // Analyse basique de contexte
+  function detectIntent(input) {
+    input = input.toLowerCase();
+    if (input.includes("vitrine") || input.includes("simple")) return "formule_starter";
+    if (input.includes("complet") || input.includes("avancé")) return "formule_pro";
+    if (input.includes("e-commerce") || input.includes("boutique")) return "formule_ecommerce";
+    return "formule_custom";
+  }
+
+  const faqData = {
+    "starter": "La formule Starter inclut un site vitrine animé, responsive, avec 1 à 3 pages et un formulaire de contact.",
+    "pro": "La formule Pro comprend tout le Starter + animations avancées, sections dynamiques, et jusqu'à 6 pages.",
+    "ecommerce": "La formule E-Commerce intègre un paiement en ligne, gestion de produits, animations et sécurité SSL.",
+    "delai": "La livraison moyenne d’un site est entre 2 jours et 2 semaines, selon la formule choisie.",
+    "contact": "Tu peux demander un devis sur la page Contact ou en cliquant sur le bouton 📨 Demander un devis.",
+    "services": "Studio Rapido propose : sites vitrines, sites animés, intégration IA, prototypes iOS, identité visuelle et plus.",
+    "responsive": "Oui, tous les sites sont responsive : ils s’adaptent parfaitement aux mobiles, tablettes et ordinateurs.",
+    "design": "Oui, le design est 100% personnalisé, moderne, animé, et peut inclure du dark mode et des effets stylés.",
+    "fondateur": "Studio Rapido est dirigé par Raphaël Haddad, passionné de design web, d'IA et de futur digital.",
+    "insta": "Tu peux suivre Studio Rapido ici 👉 https://www.instagram.com/studio.rapido/",
+    "dispo": "Actuellement, des créneaux sont ouverts pour juillet/août. Contacte-nous rapidement pour réserver !"
+  };
+
+  function askAurion(question) {
+    const q = question.toLowerCase().trim();
+
+    const match = Object.entries(faqData).find(([key, value]) => {
+      return q.includes(key) || value.toLowerCase().includes(q);
+    });
+
+    if (match) {
+      alert(match[1]);
+    } else {
+      let detected = detectIntent(q);
+      switch (detected) {
+        case "formule_starter":
+          alert(faqData["starter"]);
+          break;
+        case "formule_pro":
+          alert(faqData["pro"]);
+          break;
+        case "formule_ecommerce":
+          alert(faqData["ecommerce"]);
+          break;
+        case "formule_custom":
+          alert("Tu sembles vouloir une formule personnalisée. Clique sur 'Demander un devis' pour créer ton projet sur mesure !");
+          break;
+        default:
+          alert("Hmm… Je n’ai pas encore appris ça 🤖. Essaie avec des mots comme 'starter', 'e-commerce', 'design', 'contact', ou demande un devis !");
+      }
+    }
+  }
+
+  // Apparition automatique d'Aurion si inactif 10s
+  let aurionTimeout;
+  window.addEventListener('mousemove', () => {
+    clearTimeout(aurionTimeout);
+    aurionTimeout = setTimeout(() => {
+      if (aurionBox.classList.contains("hidden")) {
+        aurionBox.classList.remove("hidden");
+      }
+    }, 10000); // 10 secondes d’inactivité
+  });
 </script>
 </body>
 </style>
