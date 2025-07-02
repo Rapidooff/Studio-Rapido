@@ -67,3 +67,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+let aurionNotifTimer;
+let hasNotified = false;
+
+function resetAurionNotifTimer() {
+  clearTimeout(aurionNotifTimer);
+  if (hasNotified) return;
+
+  aurionNotifTimer = setTimeout(() => {
+    const aurionPanel = document.getElementById("aurion-panel");
+    const notifBubble = document.getElementById("aurion-notif");
+    if (aurionPanel && notifBubble && aurionPanel.classList.contains("hidden")) {
+      notifBubble.classList.remove("hidden");
+      hasNotified = true;
+    }
+  }, 30000); // 30 sec
+}
+
+["mousemove", "keydown", "scroll", "click"].forEach(event => {
+  window.addEventListener(event, resetAurionNotifTimer);
+});
+
+const aurionBtn = document.getElementById("aurion-toggle");
+if (aurionBtn) {
+  aurionBtn.addEventListener('click', () => {
+    const notifBubble = document.getElementById("aurion-notif");
+    if (notifBubble) {
+      notifBubble.classList.add("hidden");
+    }
+    hasNotified = false;
+    resetAurionNotifTimer();
+  });
+}
+
+resetAurionNotifTimer();
+
+async function askAurion(question) {
+  try {
+    const response = await fetch("https://ton-proxy.replit.app/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: question })
+    });
+
+    const data = await response.json();
+    if (data.reply) {
+      document.getElementById("aurion-response").textContent = data.reply;
+    } else {
+      document.getElementById("aurion-response").textContent = "Une erreur est survenue.";
+    }
+  } catch (error) {
+    console.error("Erreur Aurion:", error);
+    document.getElementById("aurion-response").textContent = "Erreur de connexion à l'IA.";
+  }
+}
+
+const aurionForm = document.getElementById("aurion-form");
+if (aurionForm) {
+  aurionForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("aurion-input");
+    const question = input.value.trim();
+    if (question) {
+      document.getElementById("aurion-response").textContent = "⏳ Aurion réfléchit...";
+      askAurion(question);
+      input.value = "";
+    }
+  });
+}

@@ -266,149 +266,255 @@
       });
     });
   </script>
-  <div id="aurion-toggle" class="aurion-toggle">🤖</div>
-  <div id="aurion-assistant" class="aurion-assistant hidden">
+  <style>
+    .aurion-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #38bdf8;
+      color: white;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      padding: 0.8rem;
+      cursor: pointer;
+      z-index: 10000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .aurion-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    body.dark-mode .aurion-toggle {
+      background: #0ea5e9;
+    }
+  </style>
+  <!-- Bouton de notification Aurion -->
+  <div id="aurion-toggle" class="aurion-toggle">
+    🤖
+    <span id="aurion-notif" class="notif-bubble hidden"></span>
+  </div>
+
+  <!-- Panneau de chat Aurion -->
+</body>
+<style>
+  .notif-bubble {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 14px;
+    height: 14px;
+    background: red;
+    border-radius: 50%;
+    border: 2px solid white;
+    z-index: 10000;
+  }
+</style>
+<script>
+  let aurionNotifTimer;
+  let hasNotified = false;
+
+  // Déclaration manquante à ajouter avant l'utilisation de aurionBtn et aurionBox
+  const aurionBtn = document.getElementById('aurion-toggle');
+  const aurionBox = document.getElementById('aurion-panel');
+
+  function resetAurionNotifTimer() {
+    clearTimeout(aurionNotifTimer);
+    if (hasNotified) return;
+
+    aurionNotifTimer = setTimeout(() => {
+      if (!aurionBox.classList.contains("hidden")) return;
+
+      // Affiche la pastille rouge
+      document.getElementById('aurion-notif').classList.remove('hidden');
+      hasNotified = true;
+    }, 30000); // 30 sec d’inactivité
+  }
+
+  ["mousemove", "keydown", "scroll", "click"].forEach(event => {
+    window.addEventListener(event, resetAurionNotifTimer);
+  });
+
+  aurionBtn.addEventListener('click', () => {
+    document.getElementById('aurion-notif').classList.add('hidden');
+    hasNotified = false;
+    resetAurionNotifTimer();
+  });
+
+  // S'assurer que le timer démarre après ajout des écouteurs d'événements
+  resetAurionNotifTimer();
+</script>
+  <div id="aurion-panel" class="aurion-panel hidden">
     <div class="aurion-header">
-      <h3 style="font-size: 1.6rem; font-weight: 700; color: #0ea5e9;">Aurion.ia v2.1</h3>
-      <p>Assistant IA mis à jour : navigation rapide, devis intelligents, synchronisation avec les formules et FAQ dynamique.</p>
-      <p style="color: #10b981; font-size: 0.85rem; font-weight: 600; margin-top: 0.3rem;">🆕 Nouvelle formule Ultra+ disponible depuis juillet !</p>
+      <h3>Aurion.ia v2.1</h3>
+      <p>Assistant IA mis à jour – FAQ, navigation rapide et chat intégré.</p>
     </div>
-    <div class="aurion-options">
-      <button onclick="navigateTo('contact')">📨 Demander un devis</button>
-      <button onclick="navigateTo('services')">🔧 Voir les services</button>
-      <button onclick="navigateTo('portfolio')">🖼️ Voir le portfolio</button>
-      <button onclick="showFAQ()">❓ Foire aux questions</button>
+    <div class="aurion-body">
+      <div class="aurion-options">
+        <button onclick="navigateTo('contact')">📨 Demander un devis</button>
+        <button onclick="navigateTo('services')">🔧 Voir les services</button>
+        <button onclick="navigateTo('portfolio')">🖼️ Voir le portfolio</button>
+        <button onclick="toggleFAQ()">❓ FAQ</button>
+      </div>
+      <div class="aurion-faq hidden" id="aurion-faq">
+        <ul>
+          <li><strong>🧠 Quels services proposez-vous ?</strong><br/>Sites vitrines, IA, animations, prototypes iOS…</li>
+          <li><strong>📦 Est-ce responsive ?</strong><br/>Oui, chaque projet est mobile-first et adapté à tous les écrans.</li>
+          <li><strong>🕒 Délais moyens ?</strong><br/>Entre 2 jours et 2 semaines selon le projet.</li>
+          <li><strong>🧾 Comment demander un devis ?</strong><br/>Clique sur le bouton "Demander un devis" ou va sur la page Contact.</li>
+        </ul>
+      </div>
+      <div class="aurion-chat">
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+          <input type="text" id="chat-input" placeholder="Pose ta question à Aurion…" />
+          <button id="chat-send">Envoyer</button>
+        </div>
+      </div>
     </div>
-    <div class="aurion-faq hidden" id="aurion-faq">
-      <p><strong>FAQ :</strong></p>
-      <ul>
-        <li><strong>🧠 Quels services proposez-vous ?</strong><br/>Sites vitrines, IA, animations, prototypes iOS…</li>
-        <li><strong>📦 Est-ce responsive ?</strong><br/>Oui, chaque projet est mobile-first et adapté à tous les écrans.</li>
-        <li><strong>🕒 Délais moyens ?</strong><br/>Entre 2 jours et 2 semaines selon le projet.</li>
-        <li><strong>🧾 Comment demander un devis ?</strong><br/>Clique sur le bouton "Demander un devis" ou va sur la page Contact.</li>
-        <li><strong>🧠 Aurion est-il à jour ?</strong><br/>Oui, il est synchronisé avec toutes les dernières fonctionnalités du site.</li>
-      </ul>
-    </div>
-    <input type="text" placeholder="Pose ta question à Aurion" onkeydown="if(event.key==='Enter')askAurion(this.value)" style="width: 100%; padding: 0.5rem; border-radius: 0.5rem; margin-top: 0.6rem;"/>
   </div>
   <section class="seo-image">
     <img src="assets/logo-seo.png" alt="Logo Studio Rapido" width="512" height="512" style="display:none;" />
   </section>
 </body>
 <style>
-  .aurion-toggle {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: #38bdf8;
-    color: white;
-    font-size: 1.6rem;
-    border-radius: 50%;
-    padding: 1rem;
-    cursor: pointer;
-    z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .aurion-assistant {
+  .aurion-panel {
     position: fixed;
     bottom: 6rem;
     right: 2rem;
-    width: 280px;
+    width: 320px;
     background: white;
     border-radius: 1rem;
     box-shadow: 0 12px 20px rgba(0,0,0,0.15);
     z-index: 9999;
-    padding: 1rem;
     font-family: 'Outfit', sans-serif;
-    animation: fadeIn 0.3s ease;
+    overflow: hidden;
   }
 
-  .aurion-header h3 {
-    margin: 0;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #0ea5e9;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  .aurion-header {
+    background: #0ea5e9;
+    color: white;
+    padding: 1rem;
+    font-weight: bold;
+    text-align: center;
   }
 
-  .aurion-header p {
-    font-size: 0.9rem;
-    color: #334155;
-    margin-bottom: 0.5rem;
+  .aurion-body {
+    padding: 1rem;
   }
 
   .aurion-options button {
-    display: block;
-    width: 100%;
     background: #0ea5e9;
     color: white;
-    padding: 0.6rem;
-    margin: 0.3rem 0;
+    padding: 0.5rem;
+    width: 100%;
+    margin: 0.25rem 0;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-    transition: background 0.2s;
-    font-weight: 600;
-  }
-
-  .aurion-options button:hover {
-    background: #0284c7;
+    font-weight: bold;
   }
 
   .aurion-faq {
+    margin-top: 1rem;
     font-size: 0.85rem;
     color: #1e293b;
+  }
+
+  .aurion-chat {
     margin-top: 1rem;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
   }
 
-  .aurion-faq ul {
-    padding-left: 1rem;
-  }
-
-  .aurion-faq li {
+  .chat-messages {
+    max-height: 180px;
+    overflow-y: auto;
     margin-bottom: 0.5rem;
   }
 
+  .chat-message.user {
+    text-align: right;
+    color: #0ea5e9;
+    margin-bottom: 0.3rem;
+  }
+
+  .chat-message.bot {
+    text-align: left;
+    color: #0f172a;
+    margin-bottom: 0.3rem;
+  }
+
+  .chat-input {
+    display: flex;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem 0 0 0.5rem;
+    font-size: 1rem;
+  }
+
+  .chat-input button {
+    padding: 0.5rem 1rem;
+    background: #0ea5e9;
+    color: white;
+    border: none;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-weight: bold;
+    cursor: pointer;
+  }
   .hidden {
     display: none;
   }
+</style>
+<!-- Dark mode styles for Aurion -->
+<style>
+body.dark-mode .aurion-panel {
+  background-color: #1e293b;
+  color: #ffffff;
+}
 
-  body.dark-mode .aurion-assistant {
-    background: #1e293b;
-    color: white;
-  }
+body.dark-mode .aurion-header {
+  background-color: #0f172a;
+  color: #ffffff;
+}
 
-  body.dark-mode .aurion-header p,
-  body.dark-mode .aurion-faq {
-    color: #ffffff;
-  }
+body.dark-mode .aurion-options button {
+  background-color: #38bdf8;
+  color: #0f172a;
+}
 
-  body.dark-mode .aurion-options button {
-    background: #38bdf8;
-  }
+body.dark-mode .aurion-chat input,
+body.dark-mode .aurion-chat button {
+  background-color: #1e293b;
+  color: #ffffff;
+  border: 1px solid #38bdf8;
+}
 
-  body.dark-mode .aurion-options button:hover {
-    background: #0ea5e9;
-  }
+body.dark-mode .chat-message.bot {
+  color: #f1f5f9;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+body.dark-mode .chat-message.user {
+  color: #38bdf8;
+}
+</style>
 </style>
 <script>
-  const aurionBtn = document.getElementById('aurion-toggle');
-  const aurionBox = document.getElementById('aurion-assistant');
+  const aurionPanel = document.getElementById('aurion-panel');
   const faq = document.getElementById('aurion-faq');
 
   aurionBtn.addEventListener('click', () => {
-    aurionBox.classList.toggle('hidden');
+    aurionPanel.classList.toggle('hidden');
   });
 
   document.addEventListener('click', function(e) {
-    if (!aurionBox.contains(e.target) && !aurionBtn.contains(e.target)) {
-      aurionBox.classList.add('hidden');
+    if (!aurionPanel.contains(e.target) && !aurionBtn.contains(e.target)) {
+      aurionPanel.classList.add('hidden');
     }
   });
 
@@ -421,72 +527,57 @@
     window.location.href = pages[page];
   }
 
-  function showFAQ() {
+  function toggleFAQ() {
     faq.classList.toggle('hidden');
   }
 
-  // Analyse basique de contexte
-  function detectIntent(input) {
-    input = input.toLowerCase();
-    if (input.includes("vitrine") || input.includes("simple")) return "formule_starter";
-    if (input.includes("complet") || input.includes("avancé")) return "formule_pro";
-    if (input.includes("e-commerce") || input.includes("boutique")) return "formule_ecommerce";
-    return "formule_custom";
+  // CHAT Aurion
+  const chatInput = document.getElementById("chat-input");
+  const chatSend = document.getElementById("chat-send");
+  const chatMessages = document.getElementById("chat-messages");
+
+  function appendMessage(text, type) {
+    const msg = document.createElement("div");
+    msg.className = `chat-message ${type}`;
+    msg.textContent = text;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  const faqData = {
-    "starter": "La formule Starter inclut un site vitrine animé, responsive, avec 1 à 3 pages et un formulaire de contact.",
-    "pro": "La formule Pro comprend tout le Starter + animations avancées, sections dynamiques, et jusqu'à 6 pages.",
-    "ecommerce": "La formule E-Commerce intègre un paiement en ligne, gestion de produits, animations et sécurité SSL.",
-    "delai": "La livraison moyenne d’un site est entre 2 jours et 2 semaines, selon la formule choisie.",
-    "contact": "Tu peux demander un devis sur la page Contact ou en cliquant sur le bouton 📨 Demander un devis.",
-    "services": "Studio Rapido propose : sites vitrines, sites animés, intégration IA, prototypes iOS, identité visuelle et plus.",
-    "responsive": "Oui, tous les sites sont responsive : ils s’adaptent parfaitement aux mobiles, tablettes et ordinateurs.",
-    "design": "Oui, le design est 100% personnalisé, moderne, animé, et peut inclure du dark mode et des effets stylés.",
-    "fondateur": "Studio Rapido est dirigé par Raphaël Haddad, passionné de design web, d'IA et de futur digital.",
-    "insta": "Tu peux suivre Studio Rapido ici 👉 https://www.instagram.com/studio.rapido/",
-    "dispo": "Actuellement, des créneaux sont ouverts pour juillet/août. Contacte-nous rapidement pour réserver !"
-  };
+  chatSend.addEventListener("click", () => {
+    const input = chatInput.value.trim();
+    if (input) {
+      appendMessage(input, "user");
+      chatInput.value = "";
 
-  function askAurion(question) {
-    const q = question.toLowerCase().trim();
+      let reply = "Je ne suis pas sûr… Essaie avec 'starter', 'e-commerce', 'services'...";
+      const q = input.toLowerCase();
+      // Ajout des cas intelligents pour Aurion
+      if (q.includes("raphaël haddad") || q.includes("raphael haddad")) {
+        reply = "Raphaël Haddad est le fondateur et développeur derrière Studio Rapido. Passionné de technologie, de design et d’intelligence artificielle, il a créé ce studio pour proposer des sites web stylés, animés et intelligents.";
+      } else if (q.includes("fondateur") || q.includes("créateur") || q.includes("raphaël")) {
+        reply = "Studio Rapido a été fondé par Raphaël Haddad, un créateur passionné de web et d’innovation numérique.";
+      } else if (q.includes("présente studio") || q.includes("c'est quoi studio")) reply = "Studio Rapido est un studio de création web animé, rapide et intelligent basé en Île-de-France.";
+      else if (q.includes("services") || q.includes("proposez")) reply = "Nous proposons des sites vitrines, e-commerce, logos, animations, IA intégrée, design responsive et plus.";
+      else if (q.includes("starter")) reply = "La formule Starter comprend un site vitrine animé, responsive, avec 1 à 3 pages.";
+      else if (q.includes("pro")) reply = "La formule Pro comprend des animations avancées, jusqu'à 6 pages, responsive design, formulaire de contact, et SEO de base.";
+      else if (q.includes("ecommerce") || q.includes("e-commerce")) reply = "La formule E-Commerce permet vente en ligne, catalogue produits, paiement sécurisé, et responsive complet.";
+      else if (q.includes("portfolio")) reply = "Tu peux retrouver les projets réalisés sur la page Portfolio.";
+      else if (q.includes("devis") || q.includes("tarif") || q.includes("prix")) reply = "Va sur la page Contact & Devis, sélectionne ton projet et reçois une estimation directe.";
+      else if (q.includes("technologies") || q.includes("utilisez")) reply = "On utilise HTML5, CSS3, JavaScript, IA (ChatGPT), animations Web, outils no-code et API modernes.";
+      else if (q.includes("delai") || q.includes("temps") || q.includes("rapidité")) reply = "Selon la complexité, un site peut être livré entre 2 jours et 2 semaines.";
+      else if (q.includes("responsive") || q.includes("mobile")) reply = "Tous les sites sont pensés mobile-first et s’adaptent à tous les écrans.";
+      else if (q.includes("paiement")) reply = "Le paiement peut se faire par virement ou Stripe. Paiement en plusieurs fois possible.";
+      else if (q.includes("modification") || q.includes("modifier")) reply = "Une fois livré, tu pourras modifier ton site ou demander une maintenance si besoin.";
+      else if (q.includes("blague")) reply = "Pourquoi les sites détestent la pluie ? Parce qu'ils n’aiment pas les bugs mouillés.";
+      else if (q.includes("motivation")) reply = "Lance ton projet maintenant. Un site stylé peut changer ton game.";
 
-    const match = Object.entries(faqData).find(([key, value]) => {
-      return q.includes(key) || value.toLowerCase().includes(q);
-    });
-
-    if (match) {
-      alert(match[1]);
-    } else {
-      let detected = detectIntent(q);
-      switch (detected) {
-        case "formule_starter":
-          alert(faqData["starter"]);
-          break;
-        case "formule_pro":
-          alert(faqData["pro"]);
-          break;
-        case "formule_ecommerce":
-          alert(faqData["ecommerce"]);
-          break;
-        case "formule_custom":
-          alert("Tu sembles vouloir une formule personnalisée. Clique sur 'Demander un devis' pour créer ton projet sur mesure !");
-          break;
-        default:
-          alert("Hmm… Je n’ai pas encore appris ça 🤖. Essaie avec des mots comme 'starter', 'e-commerce', 'design', 'contact', ou demande un devis !");
-      }
+      setTimeout(() => appendMessage(reply, "bot"), 600);
     }
-  }
+  });
 
-  // Apparition automatique d'Aurion si inactif 10s
-  let aurionTimeout;
-  window.addEventListener('mousemove', () => {
-    clearTimeout(aurionTimeout);
-    aurionTimeout = setTimeout(() => {
-      if (aurionBox.classList.contains("hidden")) {
-        aurionBox.classList.remove("hidden");
-      }
-    }, 10000); // 10 secondes d’inactivité
+  chatInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") chatSend.click();
   });
 </script>
 </body>
@@ -797,22 +888,5 @@ body.dark-mode .welcome-overlay {
   }
 </style>
 </script>
-<script>
-  const bubble = document.getElementById('assistant-bubble');
-  const panel = document.getElementById('assistant-panel');
-
-  bubble.addEventListener('click', () => {
-    panel.classList.toggle('hidden');
-  });
-
-  // Fermer le panneau si clic en dehors
-  document.addEventListener('click', function(e) {
-    if (!bubble.contains(e.target) && !panel.contains(e.target)) {
-      panel.classList.add('hidden');
-    }
-  });
-</script>
 </html>
-  body.dark-mode .aurion-header h3 {
-    color: #38bdf8;
-  }
+</html>
