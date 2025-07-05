@@ -13,7 +13,11 @@
     <div class="spinner"></div>
   </div>
   <!-- Menu hamburger pour mobile -->
-  <div class="menu-toggle" id="menu-toggle">☰</div>
+  <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
   <header>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav>
@@ -92,6 +96,7 @@
     setTimeout(() => loader.style.display = 'none', 500);
   });
 </script>
+</script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
   particlesJS("particles-js", {
@@ -110,6 +115,14 @@
       }
     }
   });
+</script>
+<script>
+  function toggleMenu() {
+    const menu = document.querySelector("nav ul");
+    const toggle = document.getElementById("menu-toggle");
+    menu.classList.toggle("show");
+    toggle.classList.toggle("active");
+  }
 </script>
 </body>
 </html>

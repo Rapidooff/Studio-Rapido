@@ -213,3 +213,15 @@ document.querySelectorAll('.cta-choisir').forEach(button => {
     window.location.href = url.toString();
   });
 });
+// Toggle menu button transformation and menu show/hide
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('menu-toggle');
+  const navMenu = document.querySelector('nav ul');
+
+  if (toggle && navMenu) {
+    toggle.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+      toggle.classList.toggle('active');
+    });
+  }
+});

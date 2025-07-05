@@ -22,6 +22,13 @@
       font-size: 2rem;
       cursor: pointer;
       padding: 1rem;
+      z-index: 10001;
+      position: absolute;
+      top: 0.5rem;
+      left: 1rem;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
     }
 
     @media screen and (max-width: 768px) {
@@ -36,8 +43,8 @@
         background: var(--welcome-bg);
         position: absolute;
         top: 100%;
-        right: 0;
         left: 0;
+        right: 0;
         padding: 1rem;
         z-index: 999;
       }
@@ -134,7 +141,7 @@
   </style>
 </head>
 <body>
-  <div class="menu-toggle" id="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</div>
+  <div class="menu-toggle" id="menu-toggle">☰</div>
   <div id="particles-js"></div>
   <div id="loader">
     <div class="spinner"></div>
@@ -142,7 +149,7 @@
   <header>
     <div class="menu-toggle" id="menu-toggle">☰</div>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
-    <nav class="main-nav">
+    <nav class="main-nav" id="main-nav">
       <ul>
         <li><a href="index.html" class="active">🏠 Accueil</a></li>
         <li><a href="a-propos.html">ℹ️ À propos</a></li>
@@ -476,10 +483,15 @@
   <section class="seo-image">
     <img src="assets/logo-seo.png" alt="Logo Studio Rapido" width="512" height="512" style="display:none;" />
   </section>
+</script>
 <script>
-  document.getElementById('menu-toggle').addEventListener('click', function () {
-    document.querySelector('nav ul').classList.toggle('show');
-  });
+    const toggleBtn = document.getElementById('menu-toggle');
+    const navList = document.querySelector('#main-nav ul');
+
+    toggleBtn.addEventListener('click', () => {
+      navList.classList.toggle('show');
+      toggleBtn.textContent = navList.classList.contains('show') ? '✖' : '☰';
+    });
 </script>
 </body>
 <style>

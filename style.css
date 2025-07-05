@@ -485,7 +485,7 @@ body.dark-mode #welcome {
   color: #334155;
   font-weight: 600;
 }
-#Stats Section
+/* Stats Section */
 .stats-section {
   display: flex;
   justify-content: center;
@@ -576,8 +576,30 @@ body.dark-mode .counter-label {
 .hidden {
   display: none !important;
 }
+/* Options select styles */
 .options-select label {
-  /* ensure specificity for mobile tweaks below */
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  display: block;
+  background: rgba(14, 165, 233, 0.05);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.options-select label:hover {
+  background: rgba(14, 165, 233, 0.1);
+  transform: scale(1.02);
+}
+
+.options-select input[type="checkbox"]:checked + label,
+.options-select input[type="radio"]:checked + label {
+  background: #0ea5e9;
+  color: white;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
 }
 
 @media screen and (max-width: 768px) {
@@ -670,36 +692,42 @@ body.dark-mode .counter-label {
 @media screen and (max-width: 768px) {
   .menu-toggle {
     display: block;
-    font-size: 2rem;
-    color: #0ea5e9;
-    cursor: pointer;
-    text-align: right;
-    padding: 1rem;
-    transition: transform 0.3s ease;
-    position: absolute;
+    position: fixed;
     top: 1rem;
-    right: 1rem;
-    z-index: 999;
+    left: 1rem;
+    z-index: 9999;
+    background: #0ea5e9;
+    color: white;
+    width: 45px;
+    height: 45px;
+    font-size: 1.6rem;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
   }
 
-  .menu-toggle:hover {
-    transform: scale(1.1);
-    color: #38bdf8;
+  .menu-toggle.active {
+    background: #1e293b;
+    transform: rotate(45deg);
   }
 
   nav ul {
     display: none;
     flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    width: 80%;
-    max-width: 300px;
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.98);
+    padding: 1.2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    width: calc(100% - 20px);
+    max-width: 320px;
     z-index: 998;
+    transition: all 0.3s ease;
   }
 
   nav ul.show {
@@ -707,7 +735,7 @@ body.dark-mode .counter-label {
   }
 
   nav ul li {
-    margin: 0.5rem 0;
-    text-align: right;
+    margin: 0.8rem 0;
+    text-align: left;
   }
 }

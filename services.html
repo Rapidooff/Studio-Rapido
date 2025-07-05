@@ -13,7 +13,11 @@
     <div class="spinner"></div>
   </div>
   <header>
-    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav>
       <ul>
@@ -109,5 +113,13 @@
     }
   });
 </script>
+<script>
+    function toggleMenu() {
+      const menu = document.querySelector("nav ul");
+      const toggle = document.getElementById("menu-toggle");
+      menu.classList.toggle("show");
+      toggle.classList.toggle("active");
+    }
+  </script>
 </body>
 </html>
