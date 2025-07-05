@@ -213,16 +213,15 @@ document.querySelectorAll('.cta-choisir').forEach(button => {
     window.location.href = url.toString();
   });
 });
-// Toggle menu button transformation and menu show/hide
 document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('menu-toggle');
-  const navMenu = document.querySelector('nav ul');
+  const toggleButton = document.getElementById('menu-toggle');
+  const menu = document.getElementById('main-menu');
 
-  if (toggle && navMenu) {
-    toggle.addEventListener('click', () => {
-      navMenu.classList.toggle('show');
-      toggle.classList.toggle('active');
-      toggle.textContent = navMenu.classList.contains('show') ? '✖' : '☰';
+  if (toggleButton && menu) {
+    toggleButton.addEventListener('click', () => {
+      menu.classList.toggle('show');
+      toggleButton.classList.toggle('active');
+      toggleButton.textContent = menu.classList.contains('show') ? '✖' : '☰';
     });
   }
 });

@@ -14,7 +14,7 @@
     <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav>
-      <ul>
+      <ul id="main-menu">
         <li><a href="index.html">🏠 Accueil</a></li>
         <li><a href="a-propos.html" class="active">ℹ️ À propos</a></li>
         <li><a href="services.html">🧰 Services</a></li>
@@ -63,7 +63,7 @@
     });
     document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
     const toggle = document.getElementById('menu-toggle');
-    const nav = document.querySelector('nav ul');
+    const nav = document.getElementById('main-menu');
 
     toggle.addEventListener('click', () => {
       nav.classList.toggle('show');
