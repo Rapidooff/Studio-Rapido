@@ -11,11 +11,7 @@
   <div id="particles-js"></div>
   <div id="loader"><div class="spinner"></div></div>
   <header>
-    <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav>
       <ul>
@@ -68,7 +64,22 @@
     document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
     const toggle = document.getElementById('menu-toggle');
     const nav = document.querySelector('nav ul');
-    toggle.addEventListener('click', () => nav.classList.toggle('show'));
+
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+      toggle.textContent = nav.classList.contains('show') ? '✖' : '☰';
+      toggle.setAttribute('aria-expanded', nav.classList.contains('show'));
+    });
+
+    document.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('show')) {
+          nav.classList.remove('show');
+          toggle.textContent = '☰';
+          toggle.setAttribute('aria-expanded', false);
+        }
+      });
+    });
     const darkToggle = document.getElementById('darkModeToggle');
     if (localStorage.getItem('theme') === 'dark') {
       document.body.classList.add('dark-mode');

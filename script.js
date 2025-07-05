@@ -222,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('click', () => {
       navMenu.classList.toggle('show');
       toggle.classList.toggle('active');
+      toggle.textContent = navMenu.classList.contains('show') ? '✖' : '☰';
     });
   }
 });

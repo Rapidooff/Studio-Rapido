@@ -739,3 +739,57 @@ body.dark-mode .counter-label {
     text-align: left;
   }
 }
+
+/* Animation douce du menu mobile */
+nav.main-nav ul {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+nav.main-nav ul.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Espacement et style visuel des liens */
+nav.main-nav ul li {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+nav.main-nav ul li:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+/* Style du lien actif */
+nav.main-nav ul li.active a {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  color: white;
+  border-radius: 10px;
+  padding: 0.4rem 1rem;
+  font-weight: bold;
+}
+/* Menu mobile : apparence uniquement au clic */
+@media screen and (max-width: 768px) {
+  .menu-toggle.active {
+    background: #1e293b;
+    transform: rotate(45deg);
+  }
+
+  /* Menu principal masqué par défaut, visible uniquement avec .show */
+  nav.main-nav ul {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  nav.main-nav ul.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
