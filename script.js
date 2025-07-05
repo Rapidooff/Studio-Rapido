@@ -138,3 +138,78 @@ if (aurionForm) {
     }
   });
 }
+
+// Préremplissage des champs de la page contact selon les paramètres d'URL (formule, options, total)
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedFormula = urlParams.get('formule');
+  const selectedOptions = urlParams.get('options');
+  const selectedTotal = urlParams.get('total');
+
+  const formulaLabels = {
+    "starter": "🚀 Formule Starter",
+    "pro": "⚡ Formule Pro",
+    "surmesure": "🎨 Formule Sur-Mesure",
+    "ultra": "🌟 Formule Ultra"
+  };
+
+  const formulaField = document.getElementById('projectType');
+  const budgetField = document.getElementById('budget');
+  const messageField = document.getElementById('message');
+  const banner = document.getElementById('formula-selected');
+
+  if (selectedFormula) {
+    const normalized = selectedFormula.toLowerCase();
+    const matchedOption = formulaField && Array.from(formulaField.options).find(opt => opt.value === normalized);
+    if (matchedOption) {
+      formulaField.value = matchedOption.value;
+      formulaField.dispatchEvent(new Event('change'));
+    }
+
+    if (banner && formulaLabels[normalized]) {
+      banner.innerText = `Tu as choisi la ${formulaLabels[normalized]} — on a déjà tout prérempli pour toi 👌`;
+      banner.style.display = 'block';
+    }
+  }
+
+  if (selectedTotal && budgetField) {
+    budgetField.value = selectedTotal;
+    budgetField.readOnly = true;
+  }
+
+  if (selectedOptions && messageField) {
+    const current = messageField.value;
+    messageField.value = `📌 Options sélectionnées : ${selectedOptions}\n\n${current}`;
+  }
+});
+
+// Redirige le bouton “Choisir cette formule” avec les options sélectionnées et le prix total
+document.querySelectorAll('.cta-choisir').forEach(button => {
+  button.addEventListener('click', function (e) {
+    e.preventDefault();
+    const section = button.closest('.tarif-content');
+    const formula = section.id.toLowerCase();
+    const basePriceText = section.querySelector('.price strong')?.textContent;
+    const basePrice = basePriceText ? parseInt(basePriceText.replace(/\D/g, '')) : 0;
+
+    const checkboxes = section.querySelectorAll('.option');
+    const selectedOptions = [];
+    let optionsTotal = 0;
+
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        selectedOptions.push(cb.parentElement.textContent.trim());
+        optionsTotal += parseInt(cb.dataset.price);
+      }
+    });
+
+    const total = basePrice + optionsTotal;
+    const url = new URL('contact.html', window.location.origin);
+    url.searchParams.set('formule', formula);
+    if (selectedOptions.length > 0) {
+      url.searchParams.set('options', selectedOptions.join(', '));
+    }
+    url.searchParams.set('total', total + '€');
+    window.location.href = url.toString();
+  });
+});

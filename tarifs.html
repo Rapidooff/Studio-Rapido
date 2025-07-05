@@ -53,6 +53,19 @@
       font-weight: bold;
     }
 
+    .options-select {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .options-select label {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .total-price {
+      margin-top: 0.7rem;
+      font-weight: bold;
+    }
+
     /* Style amélioré pour les boutons .tab-btn */
     .tarif-tabs {
       display: flex;
@@ -105,6 +118,56 @@
       50% { transform: scale(1.1); opacity: 0.8; }
       100% { transform: scale(1); opacity: 1; }
     }
+    @media screen and (max-width: 768px) {
+      .tarif-content {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+      }
+
+      .tarif-tabs {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .tab-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .options-select {
+        font-size: 1rem;
+      }
+
+      .options-select label {
+        padding: 0.5rem;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 10px;
+        margin-bottom: 0.4rem;
+        display: block;
+        background: rgba(255,255,255,0.03);
+      }
+
+      .cta {
+        display: block;
+        width: 100%;
+        margin: 0.3rem 0;
+        padding: 1rem;
+        font-size: 1.1rem;
+        text-align: center;
+        border-radius: 50px;
+      }
+
+      .total-price {
+        font-size: 1.1rem;
+        padding-top: 0.5rem;
+      }
+
+      .cta-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -138,37 +201,59 @@
       </div>
 
       <div class="tarif-content active" id="starter">
-        <h2>🚀 Formule Starter</h2>
-        <h3>L’essentiel pour une présence rapide et pro</h3>
+        <h2>🚀 Formule Starter – One Page</h2>
+        <h3>Parfait pour une présence web simple, rapide et impactante</h3>
         <ul>
-          <li> Page vitrine moderne et responsive</li>
-          <li> Design sur mesure cohérent avec ton univers</li>
-          <li> Formulaire de contact fonctionnel</li>
-          <li> Animation d’entrée simple (ScrollReveal)</li>
-          <li> Intégration express sous 72h</li>
-          <li> Support post-livraison 7 jours</li>
+          <li>1 page unique avec navigation fluide (scroll automatique)</li>
+          <li>Design responsive et sur-mesure</li>
+          <li>Formulaire de contact fonctionnel</li>
+          <li>Animations d’entrée légères</li>
+          <li>Livraison sous 3 à 5 jours</li>
+          <li>Support technique 7 jours</li>
         </ul>
         <p class="price"><strong>À partir de 199€</strong></p>
-        <div style="margin-top: 1rem;">
-          <a href="contact.html?type=Starter" class="cta">Choisir cette formule</a>
+        <div class="options-select">
+          <h4>Ajouter des options :</h4>
+          <label><input type="checkbox" class="option" data-price="79"> 🖋️ Rédaction des textes (+79€)</label><br>
+          <label><input type="checkbox" class="option" data-price="99"> 🔍 SEO avancé (+99€)</label><br>
+          <label><input type="checkbox" class="option" data-price="149"> 🛒 Mini-boutique (+149€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 🌍 Multilingue (+89€)</label><br>
+          <label><input type="checkbox" class="option" data-price="59"> 🎨 Logo simple (+59€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 📸 Retouches/Shooting (+89€)</label>
+          <p class="total-price">💵 Total estimé : <span class="price-value">0</span>€</p>
+        </div>
+        <div class="cta-group" style="margin-top: 1rem;">
+          <a href="#" class="cta cta-choisir">Choisir cette formule</a>
+          <a href="#" class="cta send-devis">📩 Obtenir un devis avec cette sélection</a>
         </div>
       </div>
 
       <div class="tarif-content" id="pro">
-        <h2>⚡ Formule Pro</h2>
-        <h3>Un site complet et performant</h3>
+        <h2>⚡ Formule Pro – Vitrine Multi-pages</h2>
+        <h3>Un site complet pour présenter ton activité de façon structurée</h3>
         <ul>
-          <li> 3 à 5 pages entièrement personnalisées</li>
-          <li> Blog intégré (optionnel)</li>
-          <li> SEO standard pour être visible sur Google</li>
-          <li> Formulaires avancés (devis, inscription…)</li>
-          <li> Design UX/UI propre + animations</li>
-          <li> Responsive mobile / tablette</li>
-          <li> Livraison sous 7 jours</li>
+          <li>Site complet de 3 à 5 pages</li>
+          <li>Design UX/UI professionnel</li>
+          <li>Formulaires avancés (devis, inscription…)</li>
+          <li>Blog intégré (optionnel)</li>
+          <li>Optimisation SEO basique</li>
+          <li>Responsive mobile & tablette</li>
+          <li>Livraison sous 7 jours</li>
         </ul>
-        <p class="price"><strong>À partir de 499€</strong></p>
-        <div style="margin-top: 1rem;">
-          <a href="contact.html?type=Pro" class="cta">Choisir cette formule</a>
+        <p class="price"><strong>À partir de 399€</strong></p>
+        <div class="options-select">
+          <h4>Ajouter des options :</h4>
+          <label><input type="checkbox" class="option" data-price="79"> 🖋️ Rédaction des textes (+79€)</label><br>
+          <label><input type="checkbox" class="option" data-price="99"> 🔍 SEO avancé (+99€)</label><br>
+          <label><input type="checkbox" class="option" data-price="149"> 🛒 Mini-boutique (+149€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 🌍 Multilingue (+89€)</label><br>
+          <label><input type="checkbox" class="option" data-price="59"> 🎨 Logo simple (+59€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 📸 Retouches/Shooting (+89€)</label>
+          <p class="total-price">💵 Total estimé : <span class="price-value">0</span>€</p>
+        </div>
+        <div class="cta-group" style="margin-top: 1rem;">
+          <a href="#" class="cta cta-choisir">Choisir cette formule</a>
+          <a href="#" class="cta send-devis">📩 Obtenir un devis avec cette sélection</a>
         </div>
       </div>
 
@@ -183,9 +268,20 @@
           <li> Référencement naturel optimisé</li>
           <li> Maintenance 1 mois incluse</li>
         </ul>
-        <p class="price"><strong>À partir de 699€</strong></p>
-        <div style="margin-top: 1rem;">
-          <a href="contact.html?type=Sur-Mesure" class="cta">Choisir cette formule</a>
+        <p class="price"><strong>À partir de 599€</strong></p>
+        <div class="options-select">
+          <h4>Ajouter des options :</h4>
+          <label><input type="checkbox" class="option" data-price="79"> 🖋️ Rédaction des textes (+79€)</label><br>
+          <label><input type="checkbox" class="option" data-price="99"> 🔍 SEO avancé (+99€)</label><br>
+          <label><input type="checkbox" class="option" data-price="149"> 🛒 Mini-boutique (+149€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 🌍 Multilingue (+89€)</label><br>
+          <label><input type="checkbox" class="option" data-price="59"> 🎨 Logo simple (+59€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 📸 Retouches/Shooting (+89€)</label>
+          <p class="total-price">💵 Total estimé : <span class="price-value">0</span>€</p>
+        </div>
+        <div class="cta-group" style="margin-top: 1rem;">
+          <a href="#" class="cta cta-choisir">Choisir cette formule</a>
+          <a href="#" class="cta send-devis">📩 Obtenir un devis avec cette sélection</a>
         </div>
       </div>
 
@@ -201,15 +297,54 @@
           <li> Maintenance 3 mois et accompagnement</li>
           <li> Option vitrine multilingue ou landing campagne</li>
         </ul>
-        <p class="price"><strong>À partir de 899€</strong></p>
-        <div style="margin-top: 1rem;">
-          <a href="contact.html?type=Ultra" class="cta">Choisir cette formule</a>
+        <p class="price"><strong>À partir de 799€</strong></p>
+        <div class="options-select">
+          <h4>Ajouter des options :</h4>
+          <label><input type="checkbox" class="option" data-price="79"> 🖋️ Rédaction des textes (+79€)</label><br>
+          <label><input type="checkbox" class="option" data-price="99"> 🔍 SEO avancé (+99€)</label><br>
+          <label><input type="checkbox" class="option" data-price="149"> 🛒 Mini-boutique (+149€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 🌍 Multilingue (+89€)</label><br>
+          <label><input type="checkbox" class="option" data-price="59"> 🎨 Logo simple (+59€)</label><br>
+          <label><input type="checkbox" class="option" data-price="89"> 📸 Retouches/Shooting (+89€)</label>
+          <p class="total-price">💵 Total estimé : <span class="price-value">0</span>€</p>
         </div>
+        <div class="cta-group" style="margin-top: 1rem;">
+          <a href="#" class="cta cta-choisir">Choisir cette formule</a>
+          <a href="#" class="cta send-devis">📩 Obtenir un devis avec cette sélection</a>
+        </div>
+  <script>
+    document.querySelectorAll('.cta-choisir').forEach(button => {
+      button.addEventListener('click', function (e) {
+        e.preventDefault();
+        const section = button.closest('.tarif-content');
+        const formula = section.id.toLowerCase();
+        const basePriceText = section.querySelector('.price strong')?.textContent;
+        const basePrice = basePriceText ? parseInt(basePriceText.replace(/\D/g, '')) : 0;
+
+        const checkboxes = section.querySelectorAll('.option');
+        const selectedOptions = [];
+        let optionsTotal = 0;
+
+        checkboxes.forEach(cb => {
+          if (cb.checked) {
+            selectedOptions.push(cb.parentElement.textContent.trim());
+            optionsTotal += parseInt(cb.dataset.price);
+          }
+        });
+
+        const total = basePrice + optionsTotal;
+        const url = new URL('contact.html', window.location.origin);
+        url.searchParams.set('formule', formula);
+        if (selectedOptions.length > 0) {
+          url.searchParams.set('options', selectedOptions.join(', '));
+        }
+        url.searchParams.set('total', total + '€');
+        window.location.href = url.toString();
+      });
+    });
+  </script>
       </div>
 
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="contact.html" class="cta">📩 Demander un devis</a>
-      </div>
     </div>
   </section>
 
@@ -272,6 +407,29 @@
   </script>
   <script src="script.js" defer></script>
   <script>
+    document.querySelectorAll('.tarif-content').forEach(section => {
+      const basePriceText = section.querySelector('.price strong')?.textContent;
+      if (!basePriceText) return;
+
+      const basePrice = parseInt(basePriceText.replace(/\D/g, ''));
+      const checkboxes = section.querySelectorAll('.option');
+      const priceDisplay = section.querySelector('.price-value');
+
+      const updateTotal = () => {
+        let total = basePrice;
+        checkboxes.forEach(cb => {
+          if (cb.checked) {
+            total += parseInt(cb.dataset.price);
+          }
+        });
+        priceDisplay.textContent = total;
+      };
+
+      checkboxes.forEach(cb => cb.addEventListener('change', updateTotal));
+      updateTotal();
+    });
+  </script>
+  <script>
     const tabBtns = document.querySelectorAll('.tab-btn');
     const contents = document.querySelectorAll('.tarif-content');
 
@@ -298,6 +456,27 @@
         if (content.classList.contains('active')) {
           content.style.maxHeight = content.scrollHeight + 'px';
         }
+      });
+    });
+  </script>
+  <script>
+    document.querySelectorAll('.send-devis').forEach(button => {
+      button.addEventListener('click', function (e) {
+        e.preventDefault();
+        const section = button.closest('.tarif-content');
+        const formula = section.id.charAt(0).toUpperCase() + section.id.slice(1);
+        const checkboxes = section.querySelectorAll('.option');
+        const selectedOptions = [];
+        checkboxes.forEach(cb => {
+          if (cb.checked) selectedOptions.push(cb.parentElement.textContent.trim());
+        });
+        const total = section.querySelector('.price-value').textContent;
+
+        const url = new URL('contact.html', window.location.origin);
+        url.searchParams.set('formule', formula);
+        url.searchParams.set('options', selectedOptions.join(', '));
+        url.searchParams.set('total', total + '€');
+        window.location.href = url.toString();
       });
     });
   </script>

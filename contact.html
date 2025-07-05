@@ -133,11 +133,11 @@
           <label for="projectType">🛠️ Type de projet</label>
           <select name="projectType" id="projectType" required>
             <option value="">Sélectionne une formule</option>
-            <option value="Starter">🚀 Formule Starter</option>
-            <option value="Pro">⚡ Formule Pro</option>
-            <option value="Sur-Mesure">🎨 Formule Sur-Mesure</option>
-            <option value="Ultra">🌟 Formule Ultra</option>
-            <option value="Autre">❓ Autre / Personnalisé</option>
+            <option value="starter">🚀 Formule Starter</option>
+            <option value="pro">⚡ Formule Pro</option>
+            <option value="surmesure">🎨 Formule Sur-Mesure</option>
+            <option value="ultra">🌟 Formule Ultra</option>
+            <option value="autre">❓ Autre / Personnalisé</option>
           </select>
         </div>
 
@@ -228,10 +228,10 @@
     const budgetInput = document.getElementById('budget');
 
     const priceMap = {
-      "Starter": "199€",
-      "Pro": "499€",
-      "Sur-Mesure": "699€",
-      "Ultra": "899€"
+      "starter": "199€",
+      "pro": "499€",
+      "surmesure": "699€",
+      "ultra": "899€"
     };
 
     projectSelect.addEventListener('change', () => {
@@ -245,36 +245,46 @@
       }
     });
 
-    // Préremplir le champ type de projet depuis l'URL
-    window.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const selectedType = urlParams.get('type');
-      if (selectedType) {
-        const optionToSelect = Array.from(projectSelect.options).find(opt => opt.value === selectedType);
-        if (optionToSelect) {
-          projectSelect.value = selectedType;
-          projectSelect.dispatchEvent(new Event('change'));
-        }
-      }
-    });
-  </script>
-  <script>
-    // Affichage dynamique du message de formule choisie
     document.addEventListener('DOMContentLoaded', () => {
-      // Récupérer le paramètre "type" dans l'URL
       const urlParams = new URLSearchParams(window.location.search);
-      const selectedType = urlParams.get('type');
-      const messageBanner = document.getElementById('formula-selected');
+      const selectedFormula = urlParams.get('formule');
+      const selectedOptions = urlParams.get('options');
+      const selectedTotal = urlParams.get('total');
+
       const formulaLabels = {
-        "Starter": "🚀 Formule Starter",
-        "Pro": "⚡ Formule Pro",
-        "Sur-Mesure": "🎨 Formule Sur-Mesure",
-        "Ultra": "🌟 Formule Ultra"
+        "starter": "🚀 Formule Starter",
+        "pro": "⚡ Formule Pro",
+        "surmesure": "🎨 Formule Sur-Mesure",
+        "ultra": "🌟 Formule Ultra"
       };
 
-      if (selectedType && formulaLabels[selectedType]) {
-        messageBanner.innerText = `Tu as choisi la ${formulaLabels[selectedType]} — on a déjà tout prérempli pour toi 👌`;
-        messageBanner.style.display = 'block';
+      const formulaField = document.getElementById('projectType');
+      const budgetField = document.getElementById('budget');
+      const messageField = document.getElementById('message');
+      const banner = document.getElementById('formula-selected');
+
+      if (selectedFormula) {
+        const normalized = selectedFormula.toLowerCase();
+        const matchedOption = Array.from(formulaField.options).find(opt => opt.value === normalized);
+        if (matchedOption) {
+          formulaField.value = matchedOption.value;
+          formulaField.dispatchEvent(new Event('change'));
+        }
+
+        if (banner && formulaLabels[normalized]) {
+          banner.innerText = `Tu as choisi la ${formulaLabels[normalized]} — on a déjà tout prérempli pour toi 👌`;
+          banner.style.display = 'block';
+        }
+      }
+
+      if (selectedTotal) {
+        budgetField.value = selectedTotal;
+        budgetField.readOnly = true;
+      }
+
+      if (selectedOptions && messageField) {
+        const current = messageField.value;
+        messageField.value = `📌 Options sélectionnées : ${selectedOptions}\n\n${current}`;
       }
     });
   </script>

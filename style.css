@@ -576,3 +576,138 @@ body.dark-mode .counter-label {
 .hidden {
   display: none !important;
 }
+.options-select label {
+  /* ensure specificity for mobile tweaks below */
+}
+
+@media screen and (max-width: 768px) {
+  header .main-nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  header .main-nav ul li a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .cta {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .welcome-content h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-content p {
+    font-size: 1.1rem;
+  }
+
+  section h2 {
+    font-size: 1.6rem !important;
+  }
+
+  section p {
+    font-size: 1rem !important;
+  }
+
+  .stats-section {
+    gap: 2rem;
+    flex-direction: column;
+  }
+
+  .stat .counter {
+    font-size: 2rem;
+  }
+
+  .aurion-toggle {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.6rem;
+    font-size: 1.2rem;
+  }
+
+  .aurion-panel {
+    bottom: 5rem;
+    right: 1rem;
+    width: 90%;
+    max-width: 320px;
+  }
+
+  footer.site-footer {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .options-select {
+    font-size: 1rem;
+  }
+
+  .options-select label {
+    padding: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    margin-bottom: 0.4rem;
+    display: block;
+    background: rgba(255,255,255,0.03);
+  }
+}
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    font-size: 2rem;
+    color: #0ea5e9;
+    cursor: pointer;
+    text-align: right;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 999;
+  }
+
+  .menu-toggle:hover {
+    transform: scale(1.1);
+    color: #38bdf8;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 300px;
+    z-index: 998;
+  }
+
+  nav ul.show {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 0.5rem 0;
+    text-align: right;
+  }
+}
