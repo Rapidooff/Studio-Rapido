@@ -86,6 +86,12 @@ nav ul {
   transition: all 0.3s ease-in-out;
 }
 
+@media screen and (max-width: 768px) {
+  nav ul {
+    display: none !important;
+  }
+}
+
 /* Désactivation temporaire des animations invisibles si JS n’est pas prêt */
 /*
 section {
@@ -817,4 +823,25 @@ nav.main-nav ul li.active a {
     opacity: 1;
     transform: translateY(0);
   }
+}
+/* Correction menu mobile flottant qui masque le contenu sur mobile */
+body.menu-open {
+  overflow: hidden;
+}
+
+nav ul.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#page-content {
+  transition: opacity 0.3s ease;
+}
+
+body.menu-open #page-content {
+  opacity: 0.2;
+  pointer-events: none;
+  filter: blur(2px);
 }

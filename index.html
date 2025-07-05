@@ -53,6 +53,32 @@
         display: flex;
       }
     }
+
+    /* Correctif : Forcer l'affichage du menu en mode desktop (évite le double menu) */
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none !important;
+      }
+
+      #main-menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+        background: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+      }
+
+      #main-menu li {
+        margin: 0 10px !important;
+      }
+    }
     html {
       scroll-behavior: smooth;
     }
@@ -141,24 +167,24 @@
   </style>
 </head>
 <body>
-  <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
-  <div id="page-content" class="hidden">
+  <nav class="main-nav">
+    <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+    <ul id="main-menu">
+      <li><a href="index.html">🏠 Accueil</a></li>
+      <li><a href="a-propos.html">ℹ️ À propos</a></li>
+      <li><a href="services.html">🧰 Services</a></li>
+      <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+      <li><a href="tarifs.html">💰 Tarifs</a></li>
+      <li><a href="contact.html">📞 Contact & Devis</a></li>
+    </ul>
+  </nav>
+  <section id="page-content">
     <div id="particles-js"></div>
     <div id="loader">
       <div class="spinner"></div>
     </div>
     <header>
       <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
-      <nav class="main-nav">
-        <ul id="main-menu">
-          <li><a href="#accueil">Accueil</a></li>
-          <li><a href="a-propos.html">ℹ️ À propos</a></li>
-          <li><a href="services.html">🧰 Services</a></li>
-          <li><a href="portfolio.html">🖼️ Portfolio</a></li>
-          <li><a href="tarifs.html">💰 Tarifs</a></li>
-          <li><a href="contact.html">📞 Contact & Devis</a></li>
-        </ul>
-      </nav>
     </header>
 
     <section id="hero" class="hero">
@@ -264,7 +290,9 @@
       </div>
       <p style="margin-top: 1rem;">© 2025 Studio Rapido — Tous droits réservés.</p>
     </footer>
-  </div>
+  </section>
+<link rel="stylesheet" href="style.css" />
+<script src="script.js" defer></script>
 <script src="https://unpkg.com/scrollreveal"></script>
 <script>
   ScrollReveal().reveal('section', {
@@ -486,12 +514,13 @@
 </script>
 </script>
 <script>
-  const toggleBtn = document.getElementById('menu-toggle');
-  const pageContent = document.getElementById('page-content');
+  const toggleButton = document.getElementById('menu-toggle');
+  const menu = document.getElementById('main-menu');
 
-  toggleBtn.addEventListener('click', () => {
-    pageContent.classList.toggle('hidden');
-    toggleBtn.textContent = pageContent.classList.contains('hidden') ? '☰' : '✖';
+  toggleButton.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    toggleButton.classList.toggle('open');
+    document.body.classList.toggle('menu-open');
   });
 </script>
 </body>
@@ -1007,3 +1036,73 @@ body.dark-mode .welcome-overlay {
 </script>
 </html>
 </html>
+    nav.main-nav ul li {
+      list-style: none;
+    }
+
+    nav.main-nav ul li button {
+      width: 100%;
+      background-color: var(--welcome-bg);
+      border: 2px solid var(--text-color);
+      color: var(--text-color);
+      padding: 0.8rem 1.2rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    nav.main-nav ul li button:hover {
+      background-color: var(--text-color);
+      color: var(--welcome-bg);
+    }
+
+    body.dark-mode nav.main-nav ul li button {
+      background-color: #1e293b;
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    body.dark-mode nav.main-nav ul li button:hover {
+      background-color: #ffffff;
+      color: #1e293b;
+    }
+
+    /* Suppression de position: fixed et top/left pour #main-menu hors mobile */
+
+    /* --- MENU BURGER RESPONSIVE --- */
+    #main-menu {
+      display: none;
+      flex-direction: column;
+    }
+    #main-menu.show {
+      display: flex;
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      #main-menu {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: none;
+        box-shadow: none;
+      }
+
+      #main-menu li {
+        margin: 0 10px;
+      }
+
+      #main-menu.show {
+        display: flex !important;
+      }
+
+      body.menu-open #main-menu {
+        display: flex !important;
+      }
+    }

@@ -219,9 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (toggleButton && menu) {
     toggleButton.addEventListener('click', () => {
-      menu.classList.toggle('show');
-      toggleButton.classList.toggle('active');
-      toggleButton.textContent = menu.classList.contains('show') ? '✖' : '☰';
+      if (window.innerWidth <= 768) {
+        menu.classList.toggle('show');
+        toggleButton.classList.toggle('open');
+        document.body.classList.toggle('menu-open');
+      }
     });
   }
 });
