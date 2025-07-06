@@ -91,7 +91,7 @@ body.dark-mode .header-banner-text {
 
 /* Style spécifique pour le texte de la bande bleue dans le header */
 .header-tagline {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   margin-top: 1rem;
   color: #e0f2fe;
@@ -99,6 +99,7 @@ body.dark-mode .header-banner-text {
 }
 
 body.dark-mode .header-tagline {
+  font-size: 1.8rem;
   color: #93c5fd;
   text-shadow: 0 0 4px rgba(59, 130, 246, 0.6);
 }
