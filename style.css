@@ -1,3 +1,12 @@
+:root {
+  --primary-color: #0ea5e9;
+  --secondary-color: #38bdf8;
+  --dark-bg: #0f172a;
+  --light-bg: #e2e8f0;
+  --text-dark: #0f172a;
+  --text-light: #e2e8f0;
+}
+
 body.dark-mode {
   background: #0f172a;
   color: #e2e8f0;
@@ -76,16 +85,14 @@ header {
   box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
 }
 
-/* Full gradient text style is now applied directly to .header-banner-text */
 .header-banner-text {
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 900;
-  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: black;
-  /* color: transparent; */
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.8), 0 0 20px rgba(14, 165, 233, 0.6);
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.25), 0 0 6px rgba(14, 165, 233, 0.5);
   letter-spacing: -0.5px;
   line-height: 1.3;
 }
@@ -128,7 +135,7 @@ nav ul {
 
 @media screen and (max-width: 768px) {
   nav ul {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -301,9 +308,6 @@ footer .socials {
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   }
 
-  nav ul.show {
-    display: flex;
-  }
 
   .menu-toggle {
     display: block;
@@ -518,8 +522,7 @@ nav a.active {
 
 body.dark-mode #welcome {
   background: #1e293b;
-  color: #1e293b;
-  border: 1px solid rgba(59, 130, 246, 0.15);
+  color: #e2e8f0;
 }
 /* Ensure heading and text in welcome section are visible in light mode */
 #welcome h1 {
@@ -772,8 +775,11 @@ body.dark-mode .counter-label {
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     width: calc(100% - 20px);
     max-width: 320px;
-    z-index: 998;
-    transition: all 0.3s ease;
+    z-index: 9999;
+  }
+
+  nav ul.show a {
+    color: #0f172a !important;
   }
 
   nav ul.show {

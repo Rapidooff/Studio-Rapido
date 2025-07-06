@@ -216,15 +216,15 @@ document.querySelectorAll('.cta-choisir').forEach(button => {
 document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('menu-toggle');
   const menu = document.getElementById('main-menu');
+  const pageContent = document.getElementById('page-content');
 
-  if (toggleButton && menu) {
-    toggleButton.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        menu.classList.toggle('show');
-        toggleButton.classList.toggle('open');
-        document.body.classList.toggle('menu-open');
+  toggleButton.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      menu.classList.toggle('show');
+      toggleButton.classList.toggle('open');
+      document.body.classList.toggle('menu-open');
 
-        const pageContent = document.getElementById('page-content');
+      if (pageContent) {
         if (menu.classList.contains('show')) {
           pageContent.classList.remove('visible');
           pageContent.classList.add('hidden');
@@ -233,6 +233,16 @@ document.addEventListener('DOMContentLoaded', () => {
           pageContent.classList.add('visible');
         }
       }
-    });
-  }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      document.getElementById('main-menu')?.classList.remove('show');
+      document.body.classList.remove('menu-open');
+      document.getElementById('menu-toggle')?.classList.remove('open');
+      document.getElementById('page-content')?.classList.add('visible');
+      document.getElementById('page-content')?.classList.remove('hidden');
+    }
+  });
 });

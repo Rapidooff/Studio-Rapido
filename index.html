@@ -169,7 +169,8 @@
 <body>
   
   <nav class="main-nav">
-    <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+    <div id="menu-toggle" class="menu-toggle">☰</div>
+
     <ul id="main-menu">
       <li><a href="index.html">🏠 Accueil</a></li>
       <li><a href="a-propos.html">ℹ️ À propos</a></li>
@@ -185,7 +186,9 @@
       <div class="spinner"></div>
     </div>
     <header>
-      <p class="header-banner-text full-gradient-text">🚀 Le futur de ton site commence ici.</p>
+      <div class="blue-banner">
+        <p class="header-banner-text">Le futur de ton site commence ici.</p>
+      </div>
       <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     </header>
 
@@ -295,7 +298,7 @@
     </footer>
   </section>
 <link rel="stylesheet" href="style.css" />
-<script src="script.js" defer></script>
+<script src="script.js"></script>
 <script src="https://unpkg.com/scrollreveal"></script>
 <script>
   ScrollReveal().reveal('section', {
@@ -517,6 +520,7 @@
 </script>
 </script>
 </script>
+</script>
 <script>
   const toggleButton = document.getElementById('menu-toggle');
   const menu = document.getElementById('main-menu');
@@ -525,6 +529,22 @@
     menu.classList.toggle('show');
     toggleButton.classList.toggle('open');
     document.body.classList.toggle('menu-open');
+  });
+</script>
+<script>
+  document.addEventListener('click', function (event) {
+    const menu = document.querySelector('.menu') || document.getElementById('main-menu');
+    const toggle = document.querySelector('.menu-toggle');
+
+    if (menu.classList.contains('show') &&
+        !menu.contains(event.target) &&
+        !toggle.contains(event.target)) {
+      menu.classList.remove('show');
+      toggle.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      document.getElementById('page-content')?.classList.add('visible');
+      document.getElementById('page-content')?.classList.remove('hidden');
+    }
   });
 </script>
 </body>
@@ -1080,9 +1100,23 @@ body.dark-mode .welcome-overlay {
     #main-menu {
       display: none;
       flex-direction: column;
+      background-color: #0f172a;
+      padding: 2rem;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 75%;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.3s ease-in-out;
     }
+
     #main-menu.show {
       display: flex;
+      opacity: 1;
+      transform: translateX(0);
     }
 
     @media (min-width: 769px) {
