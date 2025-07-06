@@ -220,39 +220,46 @@ document.querySelectorAll('.cta-choisir').forEach(button => {
   });
 });
 document.addEventListener('DOMContentLoaded', () => {
-  const toggleButton = document.getElementById('menu-toggle');
+  const burger = document.getElementById('menu-toggle');
   const menu = document.getElementById('main-menu');
   const pageContent = document.getElementById('page-content');
 
-  if (toggleButton && menu) {
-    toggleButton.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
-        menu.classList.toggle('show');
-        toggleButton.classList.toggle('open');
-        document.body.classList.toggle('menu-open');
+  if (burger && menu) {
+    burger.addEventListener('click', () => {
+      const isMobile = window.innerWidth <= 768;
+      burger.classList.toggle('active');
+      menu.classList.toggle('show');
+      document.body.classList.toggle('menu-open');
+
+      if (isMobile && pageContent) {
+        pageContent.classList.toggle('hidden', menu.classList.contains('show'));
+        pageContent.classList.toggle('visible', !menu.classList.contains('show'));
+      }
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('active');
+        menu.classList.remove('show');
+        document.body.classList.remove('menu-open');
 
         if (pageContent) {
-          if (menu.classList.contains('show')) {
-            pageContent.classList.remove('visible');
-            pageContent.classList.add('hidden');
-          } else {
-            pageContent.classList.remove('hidden');
-            pageContent.classList.add('visible');
-          }
+          pageContent.classList.remove('hidden');
+          pageContent.classList.add('visible');
         }
-      }
+      });
     });
 
     // Fermer le menu si clic extérieur
     document.addEventListener('click', (e) => {
       if (
-        window.innerWidth <= 768 &&
         !menu.contains(e.target) &&
-        !toggleButton.contains(e.target) &&
+        !burger.contains(e.target) &&
         menu.classList.contains('show')
       ) {
+        burger.classList.remove('active');
         menu.classList.remove('show');
-        toggleButton.classList.remove('open');
         document.body.classList.remove('menu-open');
 
         if (pageContent) {
@@ -262,11 +269,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Gestion lors du redimensionnement
+    // Gestion redimensionnement
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
+        burger.classList.remove('active');
         menu.classList.remove('show');
-        toggleButton.classList.remove('open');
         document.body.classList.remove('menu-open');
 
         if (pageContent) {
