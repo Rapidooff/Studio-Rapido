@@ -167,6 +167,7 @@
   </style>
 </head>
 <body>
+  
   <nav class="main-nav">
     <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
     <ul id="main-menu">
@@ -178,12 +179,13 @@
       <li><a href="contact.html">📞 Contact & Devis</a></li>
     </ul>
   </nav>
-  <section id="page-content">
+  <div id="page-content" class="visible">
     <div id="particles-js"></div>
     <div id="loader">
       <div class="spinner"></div>
     </div>
     <header>
+      <p class="header-banner-text">Le futur de ton site commence ici.</p>
       <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     </header>
 
@@ -200,7 +202,14 @@
       </div>
     </section>
 
+    <div class="slogan-banner">
+      <h1>Le futur de ton site commence ici.</h1>
+    </div>
+
     <section id="welcome" class="scroll-right">
+      <div class="accroche-futur">
+        <h2>🚀 Le futur de ton site commence ici.</h2>
+      </div>
       <div class="welcome-overlay">
         <div class="welcome-content">
           <h1 style="font-size: 2.8rem; font-weight: 700; font-family: 'Outfit', sans-serif; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); color: var(--text-color);">
@@ -430,6 +439,7 @@
   </div>
 
   <!-- Panneau de chat Aurion -->
+  </div>
 </body>
 <style>
   .notif-bubble {
@@ -1106,3 +1116,104 @@ body.dark-mode .welcome-overlay {
         display: flex !important;
       }
     }
+</style>
+<style>
+.accroche-futur {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 2rem 1rem;
+  color: #b5b9ff;
+  text-shadow: 0 0 15px #7f88ff;
+  background: transparent;
+}
+
+@media (min-width: 768px) {
+  .accroche-futur {
+    font-size: 2.2rem;
+  }
+}
+/* Ajout du style pour .intro-message */
+.intro-message {
+  font-size: 2.2rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 2rem 1rem;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .intro-message {
+    font-size: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+}
+</style>
+<style>
+.hero-slogan {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 40px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .hero-slogan {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+}
+  .hero {
+    background: linear-gradient(90deg, #0f1c3f, #172f7c);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 16px;
+    margin: 2rem auto;
+    max-width: 1100px;
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 1.5rem;
+    }
+  }
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    z-index: 2;
+  }
+</style>
+/* Slogan banner styles */
+.slogan-banner {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .slogan-banner h1 {
+    font-size: 1.5rem;
+  }
+}
