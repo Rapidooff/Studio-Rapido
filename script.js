@@ -44,6 +44,87 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.remove("active");
     }
   });
+
+  /* ---------- PREFILL CONTACT PAGE ---------- */
+  (function prefillContact() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedFormula = urlParams.get('formule');
+    const selectedOptions = urlParams.get('options');
+    const selectedTotal = urlParams.get('total');
+
+    if (!(selectedFormula || selectedOptions || selectedTotal)) return;
+
+    const formulaLabels = {
+      starter: "🚀 Formule Starter",
+      pro: "⚡ Formule Pro",
+      surmesure: "🎨 Formule Sur-Mesure",
+      ultra: "🌟 Formule Ultra"
+    };
+
+    const formulaField = document.getElementById('projectType');
+    const budgetField  = document.getElementById('budget');
+    const messageField = document.getElementById('message');
+    const banner       = document.getElementById('formula-selected');
+
+    if (selectedFormula) {
+      const key = selectedFormula.toLowerCase();
+      const opt = formulaField && [...formulaField.options].find(o => o.value === key);
+      if (opt) { formulaField.value = opt.value; formulaField.dispatchEvent(new Event('change')); }
+      if (banner && formulaLabels[key]) {
+        banner.textContent = `Tu as choisi la ${formulaLabels[key]} — on a déjà tout prérempli pour toi 👌`;
+        banner.style.display = 'block';
+      }
+    }
+    if (selectedTotal && budgetField) { budgetField.value = selectedTotal; budgetField.readOnly = true; }
+    if (selectedOptions && messageField) {
+      messageField.value = `📌 Options sélectionnées : ${selectedOptions}\n\n${messageField.value}`;
+    }
+  })();
+
+  /* ---------- BURGER MENU MOBILE ---------- */
+  (function burgerMenu() {
+    const burger      = document.getElementById('menu-toggle');
+    const menu        = document.getElementById('main-menu');
+    const pageContent = document.getElementById('page-content');
+    if (!burger || !menu) return;
+
+    burger.setAttribute('aria-controls','main-menu');
+    burger.setAttribute('aria-expanded','false');
+
+    const closeMenu = () => {
+      burger.classList.remove('active');
+      menu.classList.remove('show');
+      document.body.classList.remove('menu-open');
+      burger.setAttribute('aria-expanded','false');
+      if (pageContent) {
+        pageContent.classList.remove('hidden');
+        pageContent.classList.add('visible');
+      }
+    };
+
+    burger.addEventListener('click', () => {
+      if (window.innerWidth > 768) return;    // desktop => ignore
+      const opened = menu.classList.toggle('show');
+      burger.classList.toggle('active', opened);
+      document.body.classList.toggle('menu-open', opened);
+      burger.setAttribute('aria-expanded', opened.toString());
+
+      if (pageContent) {
+        pageContent.classList.toggle('hidden', opened);
+        pageContent.classList.toggle('visible', !opened);
+      }
+    });
+
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', e => {
+      if (menu.classList.contains('show') && !menu.contains(e.target) && !burger.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => { if (window.innerWidth > 768) closeMenu(); });
+  })();
 });
 
 // Empêche le rechargement de la page d'accueil si on clique sur le lien "Accueil"
@@ -145,49 +226,6 @@ if (aurionForm) {
   });
 }
 
-// Préremplissage des champs de la page contact selon les paramètres d'URL (formule, options, total)
-document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const selectedFormula = urlParams.get('formule');
-  const selectedOptions = urlParams.get('options');
-  const selectedTotal = urlParams.get('total');
-
-  const formulaLabels = {
-    "starter": "🚀 Formule Starter",
-    "pro": "⚡ Formule Pro",
-    "surmesure": "🎨 Formule Sur-Mesure",
-    "ultra": "🌟 Formule Ultra"
-  };
-
-  const formulaField = document.getElementById('projectType');
-  const budgetField = document.getElementById('budget');
-  const messageField = document.getElementById('message');
-  const banner = document.getElementById('formula-selected');
-
-  if (selectedFormula) {
-    const normalized = selectedFormula.toLowerCase();
-    const matchedOption = formulaField && Array.from(formulaField.options).find(opt => opt.value === normalized);
-    if (matchedOption) {
-      formulaField.value = matchedOption.value;
-      formulaField.dispatchEvent(new Event('change'));
-    }
-
-    if (banner && formulaLabels[normalized]) {
-      banner.innerText = `Tu as choisi la ${formulaLabels[normalized]} — on a déjà tout prérempli pour toi 👌`;
-      banner.style.display = 'block';
-    }
-  }
-
-  if (selectedTotal && budgetField) {
-    budgetField.value = selectedTotal;
-    budgetField.readOnly = true;
-  }
-
-  if (selectedOptions && messageField) {
-    const current = messageField.value;
-    messageField.value = `📌 Options sélectionnées : ${selectedOptions}\n\n${current}`;
-  }
-});
 
 // Redirige le bouton “Choisir cette formule” avec les options sélectionnées et le prix total
 document.querySelectorAll('.cta-choisir').forEach(button => {
@@ -218,69 +256,4 @@ document.querySelectorAll('.cta-choisir').forEach(button => {
     url.searchParams.set('total', total + '€');
     window.location.href = url.toString();
   });
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const burger = document.getElementById('menu-toggle');
-  const menu = document.getElementById('main-menu');
-  const pageContent = document.getElementById('page-content');
-
-  if (burger && menu) {
-    burger.addEventListener('click', () => {
-      const isMobile = window.innerWidth <= 768;
-      burger.classList.toggle('active');
-      menu.classList.toggle('show');
-      document.body.classList.toggle('menu-open');
-
-      if (isMobile && pageContent) {
-        pageContent.classList.toggle('hidden', menu.classList.contains('show'));
-        pageContent.classList.toggle('visible', !menu.classList.contains('show'));
-      }
-    });
-
-    // Fermer le menu quand on clique sur un lien
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('active');
-        menu.classList.remove('show');
-        document.body.classList.remove('menu-open');
-
-        if (pageContent) {
-          pageContent.classList.remove('hidden');
-          pageContent.classList.add('visible');
-        }
-      });
-    });
-
-    // Fermer le menu si clic extérieur
-    document.addEventListener('click', (e) => {
-      if (
-        !menu.contains(e.target) &&
-        !burger.contains(e.target) &&
-        menu.classList.contains('show')
-      ) {
-        burger.classList.remove('active');
-        menu.classList.remove('show');
-        document.body.classList.remove('menu-open');
-
-        if (pageContent) {
-          pageContent.classList.remove('hidden');
-          pageContent.classList.add('visible');
-        }
-      }
-    });
-
-    // Gestion redimensionnement
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        burger.classList.remove('active');
-        menu.classList.remove('show');
-        document.body.classList.remove('menu-open');
-
-        if (pageContent) {
-          pageContent.classList.remove('hidden');
-          pageContent.classList.add('visible');
-        }
-      }
-    });
-  }
 });

@@ -5,6 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Services - Studio Rapido</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Desktop: menu always visible */
+    .menu-list {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      /* Mobile: hidden by default */
+      .menu-list {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 60px;
+        right: 10px;
+        background: #0f172a;
+        padding: 1rem;
+        border-radius: 10px;
+        width: 70%;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      /* Mobile: visible when toggled */
+      .menu-list.show {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      /* Ensure toggle button is visible in mobile */
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -17,7 +52,7 @@
     <!-- <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button> -->
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav> 
-      <ul class="desktop-menu">
+      <ul id="main-menu" class="menu-list">
         <li><a href="index.html">🏠 Accueil</a></li>
         <li><a href="a-propos.html">ℹ️ À propos</a></li>
         <li><a href="services.html" class="active">🧰 Services</a></li>
@@ -58,44 +93,8 @@
       origin: 'bottom',
       interval: 200
     });
-
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-menu');
-
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('show');
-      toggle.textContent = nav.classList.contains('show') ? '✖' : '☰';
-      toggle.setAttribute('aria-expanded', nav.classList.contains('show'));
-    });
-
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (nav.classList.contains('show')) {
-          nav.classList.remove('show');
-          toggle.textContent = '☰';
-          toggle.setAttribute('aria-expanded', false);
-        }
-      });
-    });
-
-    const darkToggle = document.getElementById('darkModeToggle');
-
-    // Appliquer le thème sombre si enregistré
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-      document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
-    }
-
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-      } else {
-        localStorage.setItem('theme', 'light');
-      }
-    });
-    document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
   </script>
+  <script src="script.js" defer></script>
 <script>
   window.addEventListener('load', () => {
     const loader = document.getElementById('loader');

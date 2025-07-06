@@ -358,42 +358,6 @@
 
   <script src="https://unpkg.com/scrollreveal"></script>
   <script>
-    ScrollReveal().reveal('section', {
-      distance: '50px',
-      duration: 800,
-      easing: 'ease-in-out',
-      origin: 'bottom',
-      interval: 200
-    });
-    document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-menu');
-
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('show');
-      toggle.textContent = nav.classList.contains('show') ? '✖' : '☰';
-      toggle.setAttribute('aria-expanded', nav.classList.contains('show'));
-    });
-
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (nav.classList.contains('show')) {
-          nav.classList.remove('show');
-          toggle.textContent = '☰';
-          toggle.setAttribute('aria-expanded', false);
-        }
-      });
-    });
-    const darkToggle = document.getElementById('darkModeToggle');
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    });
-  </script>
-  <script>
     window.addEventListener('load', () => {
       const loader = document.getElementById('loader');
       loader.style.opacity = '0';

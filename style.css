@@ -137,21 +137,6 @@ body.dark-mode .header-tagline {
   text-shadow: 0 0 4px rgba(59, 130, 246, 0.6);
 }
 
-nav ul {
-  list-style: none;
-  display: flex !important;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  transition: all 0.3s ease-in-out;
-}
-
-@media screen and (max-width: 768px) {
-  nav ul {
-    display: none;
-  }
-}
 
 /* Désactivation temporaire des animations invisibles si JS n’est pas prêt */
 /*
@@ -344,49 +329,83 @@ nav {
   border-radius: 16px;
 }
 
+/* --------- NAVIGATION MENU --------- */
+
+/* --- Par défaut : desktop --- */
 .menu-toggle {
   display: none;
   font-size: 2rem;
-  color: white;
+  color: #0ea5e9;
   cursor: pointer;
-  text-align: right;
   padding: 0 1rem;
-  transition: transform 0.3s ease;
+  background: none;
+  border: none;
+  outline: none;
+  transition: transform 0.3s;
+  z-index: 3000;
 }
 
 .menu-toggle:hover {
-  transform: scale(1.1);
+  transform: scale(1.12) rotate(6deg);
 }
 
-@media screen and (max-width: 768px) {
-  #main-menu {
+/* Desktop menu visible en flex */
+.menu-list {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  position: static;
+  background: transparent;
+  opacity: 1;
+  pointer-events: auto;
+  transition: none;
+}
+
+/* --- Mobile responsive --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    z-index: 3100;
+    color: #0ea5e9;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-list {
     display: none;
     flex-direction: column;
+    gap: 1.5rem;
     position: fixed;
     top: 70px;
-    left: 10px;
-    background-color: rgba(255, 255, 255, 0.98);
-    padding: 1.2rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    width: calc(100% - 20px);
-    max-width: 320px;
-    z-index: 9999;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    z-index: 3001;
+    opacity: 0;
+    pointer-events: none;
+    padding: 2.2rem 1.4rem 2rem 1.4rem;
+    transition: opacity 0.35s, transform 0.25s;
   }
 
-  #main-menu.show {
+  .menu-list.show {
     display: flex;
-  }
-
-  #main-menu li {
-    margin: 0.8rem 0;
-    text-align: left;
-  }
-
-  #main-menu li a {
-    color: #0f172a !important;
-    font-weight: 600;
-    text-decoration: none;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) scale(1);
   }
 }
 
@@ -782,59 +801,6 @@ body.dark-mode .counter-label {
     margin-bottom: 0.4rem;
     display: block;
     background: rgba(255,255,255,0.03);
-  }
-}
-@media screen and (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 9999;
-    background: #0ea5e9;
-    color: white;
-    width: 45px;
-    height: 45px;
-    font-size: 1.6rem;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 45px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-  }
-
-  .menu-toggle.active {
-    background: #1e293b;
-    transform: rotate(45deg);
-  }
-
-  nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 70px;
-    left: 10px;
-    background-color: rgba(255, 255, 255, 0.98);
-    padding: 1.2rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    width: calc(100% - 20px);
-    max-width: 320px;
-    z-index: 9999;
-  }
-
-  nav ul.show a {
-    color: #0f172a !important;
-  }
-
-  nav ul.show {
-    display: flex;
-  }
-
-  nav ul li {
-    margin: 0.8rem 0;
-    text-align: left;
   }
 }
 

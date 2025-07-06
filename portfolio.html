@@ -13,11 +13,11 @@
     <div class="spinner"></div>
   </div>
   <!-- Menu hamburger pour mobile -->
-  <button class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  <div id="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">☰</div>
   <header>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     <nav>
-      <ul id="main-menu">
+      <ul id="main-menu" class="menu-list">
         <li><a href="index.html">🏠 Accueil</a></li>
         <li><a href="a-propos.html">ℹ️ À propos</a></li>
         <li><a href="services.html">🧰 Services</a></li>
@@ -49,64 +49,8 @@
   </footer>
 
   <script src="https://unpkg.com/scrollreveal"></script>
-  <script>
-    ScrollReveal().reveal('section', {
-      distance: '50px',
-      duration: 800,
-      easing: 'ease-in-out',
-      origin: 'bottom',
-      interval: 200
-    });
-
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-menu');
-
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('show');
-      toggle.textContent = nav.classList.contains('show') ? '✖' : '☰';
-      toggle.setAttribute('aria-expanded', nav.classList.contains('show'));
-    });
-
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (nav.classList.contains('show')) {
-          nav.classList.remove('show');
-          toggle.textContent = '☰';
-          toggle.setAttribute('aria-expanded', false);
-        }
-      });
-    });
-
-    const darkToggle = document.getElementById('darkModeToggle');
-
-    // Appliquer le thème sombre si enregistré
-    if (localStorage.getItem('theme') === 'dark') {
-      document.body.classList.add('dark-mode');
-      document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
-    }
-
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-      } else {
-        localStorage.setItem('theme', 'light');
-      }
-      document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
-    });
-
-    document.querySelectorAll('section').forEach(section => section.classList.add('visible'));
-  </script>
-<script>
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    loader.style.opacity = '0';
-    loader.style.transition = 'opacity 0.5s ease';
-    setTimeout(() => loader.style.display = 'none', 500);
-  });
-</script>
-</script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="script.js" defer></script>
 <script>
   particlesJS("particles-js", {
     "particles": {
