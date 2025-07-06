@@ -223,6 +223,15 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('show');
         toggleButton.classList.toggle('open');
         document.body.classList.toggle('menu-open');
+
+        const pageContent = document.getElementById('page-content');
+        if (menu.classList.contains('show')) {
+          pageContent.classList.remove('visible');
+          pageContent.classList.add('hidden');
+        } else {
+          pageContent.classList.remove('hidden');
+          pageContent.classList.add('visible');
+        }
       }
     });
   }
