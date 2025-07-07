@@ -812,71 +812,72 @@ body.menu-open #page-content {
 }
 
 /* Mobile: hide menu, show burger button */
+/* Style des liens dans le menu burger en version mobile */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 3000;
-    width: 48px;
-    height: 48px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--menu-shadow);
-    transition: transform 0.3s;
-    font-size: 2rem;
-    border: none;
-    cursor: pointer;
-  }
-  .menu-toggle.open {
-    transform: rotate(90deg);
-  }
-
-  /* NAV & BURGER MENU – overlay improved */
-  .menu-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.7);         /* Densified background for contrast */
-    backdrop-filter: blur(6px) brightness(0.8); /* Stronger blur + dim effect */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease-in-out;      /* Smoother fade */
-    z-index: 2999;
-  }
-  .menu-overlay.show {
-    opacity: 1;
-    pointer-events: auto;
-    animation: overlayFadeIn 0.4s ease-in-out forwards;
-  }
-  @keyframes overlayFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  .menu-list {
+  #main-menu.show {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 100px;
+    background: rgba(0, 0, 0, 0.8); /* ou ton thème */
+    height: 100vh;
     position: fixed;
     top: 0;
-    right: -100%;
-    width: var(--menu-width);
-    max-width: var(--menu-max-width);
-    height: 100%;
-    background: var(--menu-bg);
-    padding: 3rem 1.5rem;
-    gap: var(--menu-gap);
-    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
-    transition: var(--menu-transition);
-    z-index: 3001;
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .menu-list.show {
+    left: 0;
     right: 0;
+    z-index: 9998;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: slideDownFade 0.4s ease-out;
+  }
+
+  #main-menu a {
+    font-size: 1.3rem;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  #main-menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-overlay.show {
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  /* Animation progressive des liens du menu mobile */
+  #main-menu.show a {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInMenuLink 0.4s ease forwards;
+  }
+
+  #main-menu.show a:nth-child(1) { animation-delay: 0.1s; }
+  #main-menu.show a:nth-child(2) { animation-delay: 0.2s; }
+  #main-menu.show a:nth-child(3) { animation-delay: 0.3s; }
+  #main-menu.show a:nth-child(4) { animation-delay: 0.4s; }
+  #main-menu.show a:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes fadeInMenuLink {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -924,7 +925,34 @@ body.menu-open #page-content {
 .aurion-popup .close-btn:hover {
   background: rgba(255,255,255,0.3);
 }
+/* ----------- MENU LIST STYLING (Burger/Responsive) ----------- */
+.menu-list li {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.menu-list a {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: background 0.3s ease;
+}
+
+/* Les liens vides seront gérés dynamiquement via JS si nécessaire */
+
+.menu-list a:hover,
+.menu-list a.active {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+/* Show nav links with fade-in animation when menu is open */
 .menu-list.show a {
+  opacity: 1;
+  pointer-events: auto;
   animation: fadeInMenu 0.4s ease forwards;
 }
 
@@ -948,6 +976,15 @@ body.dark-mode .menu-list a {
 }
 
 body.dark-mode .menu-list a:hover {
-  color: #3b82f6;
-  background: rgba(59,130,246,0.1);
+  background: rgba(147, 197, 253, 0.1);
+}
+
+.aurion-popup.hidden {
+  display: none !important;
+}
+/* Force Aurion to hide when menu is open */
+body.menu-open .aurion-panel.show {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(20px) !important;
 }
