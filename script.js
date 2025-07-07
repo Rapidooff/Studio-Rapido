@@ -10,6 +10,7 @@ function debounce(fn, delay) {
 // 1. Animated Counters
 function initCounters() {
   const counters = document.querySelectorAll('.counter');
+  if (!counters.length) return;
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -35,8 +36,10 @@ function initCounters() {
 
 // 2. Active Nav Link Highlight
 function initActiveNavLink() {
+  const links = document.querySelectorAll('nav a');
+  if (!links.length) return;
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('nav a').forEach(link => {
+  links.forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === currentPage);
   });
 }
@@ -82,7 +85,9 @@ function initPrefillContact() {
 
 // 4. Smooth Scroll for Home Link
 function initSmoothScroll() {
-  document.querySelectorAll('nav a[href="index.html"]').forEach(link => {
+  const links = document.querySelectorAll('nav a[href="index.html"]');
+  if (!links.length) return;
+  links.forEach(link => {
     link.addEventListener('click', e => {
       if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
         e.preventDefault();
@@ -111,6 +116,7 @@ function initDarkMode() {
 function initBurgerMenu() {
   const burger = document.getElementById('menu-toggle');
   const menu = document.getElementById('main-menu');
+  menu && menu.setAttribute('role', 'menu');
   const overlay = document.getElementById('menu-overlay');
   const pageContent = document.getElementById('page-content');
   if (!burger || !menu) return;
@@ -145,6 +151,7 @@ function initBurgerMenu() {
       pageContent.classList.toggle('hidden', open);
       pageContent.classList.toggle('visible', !open);
     }
+    if (open) window.scrollTo({ top: 0 });
   });
 
   overlay && overlay.addEventListener('click', closeMenu);
@@ -222,7 +229,9 @@ async function askAurion(question) {
 
 // 8. Redirect "Choisir cette formule" Buttons
 function initFormRedirect() {
-  document.querySelectorAll('.cta-choisir').forEach(button => {
+  const sections = document.querySelectorAll('.cta-choisir');
+  if (!sections.length) return;
+  sections.forEach(button => {
     button.addEventListener('click', e => {
       e.preventDefault();
       const section = button.closest('.tarif-content');
