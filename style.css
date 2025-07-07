@@ -833,19 +833,28 @@ body.menu-open #page-content {
     transform: rotate(90deg);
   }
 
+  /* NAV & BURGER MENU – overlay improved */
   .menu-overlay {
     position: fixed;
     inset: 0;
-    background: var(--overlay-bg);
-    backdrop-filter: blur(4px);
+    background: rgba(15, 23, 42, 0.7);         /* Densified background for contrast */
+    backdrop-filter: blur(6px) brightness(0.8); /* Stronger blur + dim effect */
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease-in-out;      /* Smoother fade */
     z-index: 2999;
   }
   .menu-overlay.show {
     opacity: 1;
     pointer-events: auto;
+  }
+  /* Optional fade-in keyframe */
+  @keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .menu-overlay.show {
+    animation: overlayFadeIn 0.4s ease-in-out forwards;
   }
 
   .menu-list {
@@ -868,4 +877,76 @@ body.menu-open #page-content {
   .menu-list.show {
     right: 0;
   }
+}
+
+.aurion-popup {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 280px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  z-index: 9999;
+  animation: fadeSlideUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.aurion-popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.aurion-popup .close-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+.menu-list.show a {
+  animation: fadeInMenu 0.4s ease forwards;
+}
+
+@keyframes fadeInMenu {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+body.dark-mode .menu-list {
+  background: #1e293b;
+}
+
+body.dark-mode .menu-list a {
+  color: #93c5fd;
+}
+
+body.dark-mode .menu-list a:hover {
+  color: #3b82f6;
+  background: rgba(59,130,246,0.1);
 }
