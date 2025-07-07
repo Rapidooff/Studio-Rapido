@@ -5,6 +5,15 @@
   --light-bg: #e2e8f0;
   --text-dark: #0f172a;
   --text-light: #e2e8f0;
+  /* Custom variables for overlay and menu */
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  --menu-bg: var(--light-bg);
+  --menu-radius: 22px;
+  --menu-width: 80%;
+  --menu-max-width: 300px;
+  --menu-gap: 1.5rem;
+  --menu-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  --menu-transition: right 0.35s ease, opacity 0.3s ease, transform 0.25s ease;
 }
 
 body.dark-mode {
@@ -297,21 +306,6 @@ footer .socials {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: row;
-    display: none;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  }
-
-
-  .menu-toggle {
-    display: block;
-  }
-}
 nav {
   position: sticky;
   top: 0;
@@ -329,85 +323,6 @@ nav {
   border-radius: 16px;
 }
 
-/* --------- NAVIGATION MENU --------- */
-
-/* --- Par défaut : desktop --- */
-.menu-toggle {
-  display: none;
-  font-size: 2rem;
-  color: #0ea5e9;
-  cursor: pointer;
-  padding: 0 1rem;
-  background: none;
-  border: none;
-  outline: none;
-  transition: transform 0.3s;
-  z-index: 3000;
-}
-
-.menu-toggle:hover {
-  transform: scale(1.12) rotate(6deg);
-}
-
-/* Desktop menu visible en flex */
-.menu-list {
-  display: flex;
-  gap: 2.5rem;
-  justify-content: center;
-  align-items: center;
-  position: static;
-  background: transparent;
-  opacity: 1;
-  pointer-events: auto;
-  transition: none;
-}
-
-/* --- Mobile responsive --- */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    top: 1.2rem;
-    left: 1.2rem;
-    z-index: 3100;
-    color: #0ea5e9;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .menu-list {
-    display: none;
-    flex-direction: column;
-    gap: 1.5rem;
-    position: fixed;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    max-width: 400px;
-    background: #fff;
-    border-radius: 22px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-    z-index: 3001;
-    opacity: 0;
-    pointer-events: none;
-    padding: 2.2rem 1.4rem 2rem 1.4rem;
-    transition: opacity 0.35s, transform 0.25s;
-  }
-
-  .menu-list.show {
-    display: flex;
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(-50%) scale(1);
-  }
-}
 
 #particles-js {
   position: fixed;
@@ -645,11 +560,6 @@ body.dark-mode .counter-label {
   color: #000000;
 }
 
-@media (max-width: 768px) {
-  body.dark-mode nav ul {
-    background: transparent;
-  }
-}
 /* Aurion toggle button and notification bubble */
 .aurion-toggle {
   position: fixed;
@@ -689,6 +599,37 @@ body.dark-mode .counter-label {
 
 .hidden {
   display: none !important;
+}
+
+/* --- Aurion Panel Enhancements --- */
+.aurion-panel {
+  position: fixed;
+  bottom: calc(2rem + 50px); /* sits just above the toggle button */
+  right: 2rem;
+  max-width: 360px;
+  width: 100%;
+  padding: 1rem;
+  background: var(--menu-bg);
+  color: var(--text-dark);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(14,165,233,0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10008;
+}
+.aurion-panel.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Dark mode override for Aurion panel */
+body.dark-mode .aurion-panel {
+  background: var(--dark-bg);
+  color: var(--text-light);
+  border-color: #3b82f6;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
 }
 /* Options select styles */
 .options-select label {
@@ -804,59 +745,6 @@ body.dark-mode .counter-label {
   }
 }
 
-/* Animation douce du menu mobile */
-nav.main-nav ul {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-nav.main-nav ul.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Espacement et style visuel des liens */
-nav.main-nav ul li {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  border-radius: 10px;
-  transition: background 0.2s ease;
-}
-
-nav.main-nav ul li:hover {
-  background-color: rgba(0,0,0,0.05);
-}
-
-/* Style du lien actif */
-nav.main-nav ul li.active a {
-  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-  color: white;
-  border-radius: 10px;
-  padding: 0.4rem 1rem;
-  font-weight: bold;
-}
-/* Menu mobile : apparence uniquement au clic */
-@media screen and (max-width: 768px) {
-  .menu-toggle.active {
-    background: #1e293b;
-    transform: rotate(45deg);
-  }
-
-  /* Menu principal masqué par défaut, visible uniquement avec .show */
-  nav.main-nav ul {
-    display: none;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  nav.main-nav ul.show {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 /* Masquage progressif du contenu principal jusqu'à interaction */
 #page-content.hidden {
   display: none;
@@ -887,13 +775,6 @@ body.menu-open {
   overflow: hidden;
 }
 
-nav ul.show {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
 #page-content {
   transition: opacity 0.3s ease;
 }
@@ -913,4 +794,78 @@ body.menu-open #page-content {
     0 0 10px #38bdf8,
     0 0 15px #7c3aed,
     0 0 20px #8b5cf6;
+}
+/* --------- NAV & BURGER MENU --------- */
+
+/* Desktop: show menu horizontally, hide burger */
+.menu-toggle {
+  display: none;
+}
+.menu-list {
+  display: flex;
+  gap: var(--menu-gap);
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile: hide menu, show burger button */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 3000;
+    width: 48px;
+    height: 48px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--menu-shadow);
+    transition: transform 0.3s;
+  }
+  .menu-toggle.open {
+    transform: rotate(90deg);
+  }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-bg);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 2999;
+  }
+  .menu-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-list {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: var(--menu-width);
+    max-width: var(--menu-max-width);
+    height: 100%;
+    background: var(--menu-bg);
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-gap);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+    transition: var(--menu-transition);
+    z-index: 3001;
+  }
+  .menu-list.show {
+    right: 0;
+  }
 }
