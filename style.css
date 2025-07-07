@@ -828,6 +828,9 @@ body.menu-open #page-content {
     justify-content: center;
     box-shadow: var(--menu-shadow);
     transition: transform 0.3s;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
   }
   .menu-toggle.open {
     transform: rotate(90deg);
@@ -847,18 +850,16 @@ body.menu-open #page-content {
   .menu-overlay.show {
     opacity: 1;
     pointer-events: auto;
+    animation: overlayFadeIn 0.4s ease-in-out forwards;
   }
-  /* Optional fade-in keyframe */
   @keyframes overlayFadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
   }
-  .menu-overlay.show {
-    animation: overlayFadeIn 0.4s ease-in-out forwards;
-  }
 
   .menu-list {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 0;
     right: -100%;
@@ -867,12 +868,12 @@ body.menu-open #page-content {
     height: 100%;
     background: var(--menu-bg);
     padding: 3rem 1.5rem;
-    display: flex;
-    flex-direction: column;
     gap: var(--menu-gap);
     box-shadow: -4px 0 20px rgba(0,0,0,0.2);
     transition: var(--menu-transition);
     z-index: 3001;
+    opacity: 1;
+    pointer-events: auto;
   }
   .menu-list.show {
     right: 0;
