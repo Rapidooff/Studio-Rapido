@@ -122,6 +122,7 @@ function initBurgerMenu() {
     overlay && overlay.classList.remove('show');
     document.body.classList.remove('menu-open');
     burger.setAttribute('aria-expanded', 'false');
+    document.querySelector('.aurion-popup')?.classList.remove('hidden');
     if (pageContent) {
       pageContent.classList.remove('hidden');
       pageContent.classList.add('visible');
@@ -139,6 +140,7 @@ function initBurgerMenu() {
     burger.setAttribute('aria-expanded', open.toString());
     document.body.classList.toggle('menu-open', open);
     overlay && overlay.classList.toggle('show', open);
+    document.querySelector('.aurion-popup')?.classList.toggle('hidden', open);
     if (pageContent) {
       pageContent.classList.toggle('hidden', open);
       pageContent.classList.toggle('visible', !open);
@@ -243,6 +245,18 @@ function initFormRedirect() {
     });
   });
 }
+
+// 9. Aurion Close Button
+document.addEventListener("DOMContentLoaded", () => {
+  const closeBtn = document.querySelector(".aurion-popup .close-btn");
+  const popup = document.querySelector(".aurion-popup");
+
+  if (closeBtn && popup) {
+    closeBtn.addEventListener("click", () => {
+      popup.classList.add("hidden");
+    });
+  }
+});
 
 // Initialize everything once DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
