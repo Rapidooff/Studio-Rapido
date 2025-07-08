@@ -1,3 +1,26 @@
+// Base de questions/réponses locales
+const faqMapping = {
+  "quels services proposez-vous": 
+    "Studio Rapido propose des sites vitrines, e‑commerce, prototypes iOS, intégration d’IA sur-mesure, animations Web et refontes UX/UI.",
+  "délais moyens de livraison": 
+    "Nos délais vont de 2 jours pour un site simple à 2 semaines pour un projet complet avec IA et animations avancées.",
+  "comment demander un devis": 
+    "Rien de plus simple : clique sur “Demander un devis”, choisis ta formule et ajoute tes options. Tu recevras un email récapitulatif immédiatement.",
+  "qu'est-ce qu'un site vitrine": 
+    "Un site vitrine est une présence web de 1 à 6 pages, idéale pour présenter ton activité ou ton portfolio.",
+  "technologies utilisées": 
+    "Nous utilisons HTML5, CSS3, JavaScript (ES6+), animations ScrollReveal et intégrons des IA via l’API OpenAI ou des solutions locales LLaMA.",
+  "qui est raphaël haddad":
+    "Raphaël Haddad est le fondateur et développeur principal de Studio Rapido, passionné de web, design et IA.",
+  "fondateur de studio rapido":
+    "Studio Rapido a été fondé par Raphaël Haddad pour offrir des sites web modernes, animés et intelligents.",
+  "qui est raphael":
+    "Raphaël Haddad, c’est moi ! Je crée des expériences web stylées, animées et intégrant de l’IA sur mesure.",
+  "qui est raphaël":
+    "Raphaël Haddad est un développeur web et IA basé en Île-de-France, fondateur de Studio Rapido."
+  // … ajoute d’autres paires selon tes besoins …
+};
+
 // Utility: debounce function
 function debounce(fn, delay) {
   let timer;
@@ -112,103 +135,125 @@ function initDarkMode() {
   });
 }
 
-// 6. Burger Menu Mobile
-function initBurgerMenu() {
-  const burger = document.getElementById('menu-toggle');
-  const menu = document.getElementById('main-menu');
-  const overlay = document.getElementById('menu-overlay');
-
-  // Fonctions d’ouverture et de fermeture du menu
-  function openMenu() {
-    menu.classList.add('show');
-    overlay.classList.add('show');
-    burger.textContent = '✖';
-    burger.setAttribute('aria-expanded', 'true');
-    document.body.classList.add('menu-open');
-  }
-  function closeMenu() {
-    menu.classList.remove('show');
-    overlay.classList.remove('show');
-    burger.textContent = '☰';
-    burger.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('menu-open');
-  }
-
-  // Gestion des clics
-  burger.addEventListener('click', e => {
-    e.stopPropagation();
-    if (menu.classList.contains('show')) closeMenu();
-    else openMenu();
-  });
-  overlay && overlay.addEventListener('click', closeMenu);
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-}
-
-// 7. Aurion Notification Timer and Chat
+// ==== INIT AURION ====
 function initAurion() {
-  let hasNotified = false;
-  let timer;
-  const panel = document.getElementById('aurion-panel');
-  const bubble = document.getElementById('aurion-notif');
-  const btn = document.getElementById('aurion-toggle');
+  const panel       = document.getElementById('aurion-panel');
+  const overlay     = document.getElementById('aurion-overlay');
+  const toggleBtn   = document.getElementById('aurion-toggle');
+  const notifBubble = document.getElementById('aurion-notif');
+  const chatInput   = document.getElementById('chat-input');
+  const chatSend    = document.getElementById('chat-send');
+  const chatArea    = document.getElementById('chat-messages');
 
+  // Ouvre ou ferme le panneau Aurion
+  function togglePanel(open) {
+    panel.classList.toggle('show', open);
+    panel.classList.toggle('hidden', !open);
+    overlay.classList.toggle('show', open);
+    notifBubble?.classList.add('hidden');
+    if (open) chatInput.focus();
+  }
+
+  // Ajoute une bulle de message
+  function appendMessage(who, text) {
+    const msg = document.createElement('div');
+    msg.classList.add('chat-message', who);
+    msg.textContent = text;
+    chatArea.append(msg);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
+  // Envoie du message
+  async function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    appendMessage('user', text);
+    chatInput.value = '';
+
+    // --- Réponse instantanée depuis la base FAQ ---
+    const key = Object.keys(faqMapping).find(k =>
+      text.toLowerCase().includes(k)
+    );
+    if (key) {
+      appendMessage('bot', faqMapping[key]);
+      return;
+    }
+
+    // bulle « en attente »
+    const loader = document.createElement('div');
+    loader.classList.add('chat-message', 'bot');
+    loader.textContent = '⏳ Aurion réfléchit…';
+    chatArea.append(loader);
+    chatArea.scrollTop = chatArea.scrollHeight;
+
+    try {
+      const reply = await askAurion(text);           // votre fetch
+      loader.remove();
+      appendMessage('bot', reply);
+    } catch (e) {
+      loader.remove();
+      appendMessage('bot', "Oops, une erreur est survenue.");
+      console.error(e);
+    }
+  }
+
+  // Clic sur le toggle 🤖
+  toggleBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    togglePanel(!panel.classList.contains('show'));
+  });
+
+  // Clic hors du panneau ou sur l’overlay ferme
+  overlay.addEventListener('click', () => togglePanel(false));
+  document.addEventListener('click', e => {
+    if (!panel.contains(e.target) && e.target !== toggleBtn) {
+      togglePanel(false);
+    }
+  });
+
+  // Envoi au clic sur le bouton « Envoyer »
+  chatSend.addEventListener('click', sendMessage);
+
+  // Envoi à la touche Enter
+  chatInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Timer de notification si inactif…
+  let notified = false, timer;
   function notify() {
-    if (panel && bubble && panel.classList.contains('hidden') && !hasNotified) {
-      bubble.classList.remove('hidden');
-      hasNotified = true;
+    if (!notified && panel.classList.contains('hidden')) {
+      notifBubble?.classList.remove('hidden');
+      notified = true;
     }
   }
-
-  function resetTimer() {
+  function resetNotifTimer() {
     clearTimeout(timer);
-    if (hasNotified) return;
-    timer = setTimeout(notify, 30000);
+    if (!notified) timer = setTimeout(notify, 30000);
   }
-
-  ['mousemove', 'keydown', 'scroll', 'click'].forEach(evt => window.addEventListener(evt, resetTimer));
-  resetTimer();
-
-  btn && btn.addEventListener('click', () => {
-    bubble && bubble.classList.add('hidden');
-    hasNotified = false;
-    resetTimer();
-  });
-
-  const form = document.getElementById('aurion-form');
-  form && form.addEventListener('submit', e => {
-    e.preventDefault();
-    const input = document.getElementById('aurion-input');
-    const msg = input.value.trim();
-    if (msg) {
-      document.getElementById('aurion-response').textContent = '⏳ Aurion réfléchit...';
-      askAurion(msg);
-      input.value = '';
-    }
-  });
+  ['mousemove','keydown','scroll','click'].forEach(evt =>
+    window.addEventListener(evt, resetNotifTimer)
+  );
+  resetNotifTimer();
 }
 
-// Aurion fetch logic (unchanged)
+// ==== APPEL À L’API AURION ====
 async function askAurion(question) {
-  try {
-    const response = await fetch("https://ton-proxy.replit.app/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ message: question })
-    });
-
-    const data = await response.json();
-    if (data.reply) {
-      document.getElementById("aurion-response").textContent = data.reply;
-    } else {
-      document.getElementById("aurion-response").textContent = "Une erreur est survenue.";
-    }
-  } catch (error) {
-    console.error("Erreur Aurion:", error);
-    document.getElementById("aurion-response").textContent = "Erreur de connexion à l'IA.";
-  }
+  const res = await fetch('https://ton-proxy.replit.app/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: question })
+  });
+  const data = await res.json();
+  if (!data.reply) throw new Error('Pas de réponse');
+  return data.reply;
 }
+
+// Au chargement de la page
+document.addEventListener('DOMContentLoaded', initAurion);
 
 // 8. Redirect "Choisir cette formule" Buttons
 function initFormRedirect() {
@@ -257,7 +302,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initPrefillContact();
   initSmoothScroll();
   initDarkMode();
-  initBurgerMenu();
-  initAurion();
   initFormRedirect();
 });

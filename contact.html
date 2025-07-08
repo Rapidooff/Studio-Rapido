@@ -90,15 +90,13 @@
   </style>
 </head>
 <body>
-  <div id="menu-overlay" class="menu-overlay hidden"></div>
   <div id="particles-js"></div>
   <div id="loader">
     <div class="spinner"></div>
   </div>
   <header>
-    <div id="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu" aria-controls="main-menu" aria-expanded="false">☰</div>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
-    <nav role="navigation">
+    <nav class="main-nav">
       <ul id="main-menu" class="menu-list">
         <li><a href="index.html">🏠 Accueil</a></li>
         <li><a href="a-propos.html">ℹ️ À propos</a></li>
@@ -311,31 +309,6 @@
         "onhover": { "enable": true, "mode": "repulse" }
       }
     }
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('main-menu');
-    const overlay = document.getElementById('menu-overlay');
-
-    function toggleMenu() {
-      const isOpen = nav.classList.toggle('show');
-      toggle.classList.toggle('open', isOpen);
-      overlay.classList.toggle('show', isOpen);
-      toggle.setAttribute('aria-expanded', isOpen);
-    }
-
-    toggle.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
-
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (nav.classList.contains('show')) {
-          toggleMenu();
-        }
-      });
-    });
   });
 </script>
 </body>

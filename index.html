@@ -20,63 +20,42 @@
 </head>
 <body>
   <div id="menu-overlay" class="menu-overlay hidden"></div>
-  <div id="loader">
-    <div class="spinner"></div>
-  </div>
-  <div id="aurion-overlay" class="aurion-overlay"></div>
-  <div class="aurion-popup">
-    <span class="close-btn">✕</span>
-    <p>Salut, je suis Aurion. Que puis-je faire pour toi ?</p>
-  </div>
-  <div id="aurion-toggle" class="aurion-toggle" aria-label="Ouvrir le chat">🤖<span id="aurion-notif" class="notif-bubble hidden"></span></div>
+  <header>
+    <button id="darkModeToggle">🌓</button>
+    <nav class="main-nav">
+      <ul id="main-menu" class="menu-list">
+        <li><a href="index.html">🏠 Accueil</a></li>
+        <li><a href="a-propos.html">ℹ️ À propos</a></li>
+        <li><a href="services.html">🧰 Services</a></li>
+        <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+        <li><a href="tarifs.html">💰 Tarifs</a></li>
+        <li><a href="contact.html">📞 Contact & Devis</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="aurion-overlay" class="aurion-overlay hidden"></div>
   <div id="aurion-panel" class="aurion-panel hidden">
     <div class="aurion-header">
-      <h3>Aurion.ia v2.1</h3>
-      <p>Assistant IA mis à jour – FAQ, navigation rapide et chat intégré.</p>
+      <h4>Aurion.ia v2.1</h4>
+      <button class="close-btn" id="aurion-close">×</button>
     </div>
-    <div class="aurion-body">
-      <div class="aurion-options">
-        <button onclick="navigateTo('contact')">📨 Demander un devis</button>
-        <button onclick="navigateTo('services')">🔧 Voir les services</button>
-        <button onclick="navigateTo('portfolio')">🖼️ Voir le portfolio</button>
-        <button onclick="toggleFAQ()">❓ FAQ</button>
-      </div>
-      <div class="aurion-faq hidden" id="aurion-faq">
-        <ul>
-          <li><strong>🧠 Quels services proposez-vous ?</strong><br/>Sites vitrines, IA, animations, prototypes iOS…</li>
-          <li><strong>📦 Est-ce responsive ?</strong><br/>Oui, chaque projet est mobile-first et adapté à tous les écrans.</li>
-          <li><strong>🕒 Délais moyens ?</strong><br/>Entre 2 jours et 2 semaines selon le projet.</li>
-          <li><strong>🧾 Comment demander un devis ?</strong><br/>Clique sur le bouton "Demander un devis" ou va sur la page Contact.</li>
-        </ul>
-      </div>
-      <div class="aurion-chat">
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input">
-          <input type="text" id="chat-input" placeholder="Pose ta question à Aurion…" />
-          <button id="chat-send">Envoyer</button>
-        </div>
-      </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="aurion-suggestions">
+      <button class="suggestion">Quels services proposez-vous ?</button>
+      <!-- … autres suggestions … -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chat-input" placeholder="Écris un message…" />
+      <button id="chat-send">Envoyer</button>
     </div>
   </div>
-  <div id="menu-overlay" class="menu-overlay"></div>
-  <div id="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu">☰</div>
-  <nav role="navigation">
-    <ul id="main-menu" class="menu-list">
-      <li><a href="index.html">🏠 Accueil</a></li>
-      <li><a href="a-propos.html">ℹ️ À propos</a></li>
-      <li><a href="services.html">🧰 Services</a></li>
-      <li><a href="portfolio.html">🖼️ Portfolio</a></li>
-      <li><a href="tarifs.html">💰 Tarifs</a></li>
-      <li><a href="contact.html">📞 Contact & Devis</a></li>
-    </ul>
-  </nav>
+  <button id="aurion-toggle" class="aurion-toggle">🤖<span id="aurion-notif" class="notif-bubble hidden"></span></button>
   <div id="page-content" class="visible">
     <div id="particles-js"></div>
     <header>
       <div class="blue-banner">
         <p class="header-banner-text">Le futur de ton site commence ici.</p>
       </div>
-      <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
     </header>
 
     <section id="hero" class="hero">
@@ -184,59 +163,6 @@
       <p style="margin-top: 1rem;">© 2025 Studio Rapido — Tous droits réservés.</p>
     </footer>
   </div>
-  <!-- Aurion scripts -->
-  <script>
-    const aurionBtn = document.getElementById('aurion-toggle');
-    const aurionPanel = document.getElementById('aurion-panel');
-    const aurionOverlay = document.getElementById('aurion-overlay');
-    const faq = document.getElementById('aurion-faq');
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-    const chatMessages = document.getElementById('chat-messages');
-
-    function toggleAurion(open) {
-      aurionOverlay.classList.toggle('show', open);
-      aurionPanel.classList.toggle('show', open);
-      aurionPanel.classList.toggle('hidden', !open);
-      document.getElementById('aurion-notif').classList.add('hidden');
-    }
-
-    aurionBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleAurion(!aurionPanel.classList.contains('show'));
-    });
-
-    aurionOverlay.addEventListener('click', () => toggleAurion(false));
-    document.addEventListener('click', e => {
-      if (!aurionPanel.contains(e.target) && e.target !== aurionBtn) {
-        toggleAurion(false);
-      }
-    });
-
-    function navigateTo(page) {
-      const pages = { contact: 'contact.html', services: 'services.html', portfolio: 'portfolio.html' };
-      window.location.href = pages[page];
-    }
-    function toggleFAQ() {
-      faq.classList.toggle('hidden');
-    }
-    function appendMessage(text, type) {
-      const msg = document.createElement('div');
-      msg.className = `chat-message ${type}`;
-      msg.textContent = text;
-      chatMessages.appendChild(msg);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-    chatSend.addEventListener("click", () => {
-      const input = chatInput.value.trim();
-      if (!input) return;
-      appendMessage(input, "user");
-      chatInput.value = "";
-      let reply = "Je ne suis pas sûr… Essaie avec 'services' ou 'devis'.";
-      setTimeout(() => appendMessage(reply, "bot"), 600);
-    });
-    chatInput.addEventListener("keydown", e => { if (e.key === "Enter") chatSend.click(); });
-  </script>
   <!-- Place script.js just before </body> -->
   <script src="script.js" defer></script>
   <script>

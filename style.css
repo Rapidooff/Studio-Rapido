@@ -1,26 +1,3 @@
-/* overlay behind mobile menu */
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 9998;
-}
-.menu-overlay.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-/* ensure menu-list is off‑canvas by default */
-.menu-list {
-  transform: translateX(100%);
-  transition: transform 0.35s ease;
-}
-.menu-list.show {
-  transform: translateX(0);
-}
 :root {
   --primary-color: #0ea5e9;
   --secondary-color: #38bdf8;
@@ -159,14 +136,21 @@ body:not(.dark-mode) .header-banner-text::before {
   font-size: 1.8rem;
   font-weight: 600;
   margin-top: 1rem;
-  color: #e0f2fe;
-  text-shadow: 0 0 4px rgba(14, 165, 233, 0.6);
+  color: black;
+  text-shadow:
+    0 0 5px #0ea5e9,
+    0 0 10px #38bdf8,
+    0 0 15px #7c3aed,
+    0 0 20px #8b5cf6;
 }
 
 body.dark-mode .header-tagline {
   font-size: 1.8rem;
-  color: #93c5fd;
-  text-shadow: 0 0 4px rgba(59, 130, 246, 0.6);
+  color: #e2e8f0;
+  text-shadow:
+    0 0 5px #3b82f6,
+    0 0 10px #2563eb,
+    0 0 15px #1e3a8a;
 }
 
 
@@ -207,23 +191,6 @@ section h2 {
   font-weight: 700;
 }
 
-nav a {
-  color: #0f172a;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-nav a:hover,
-nav a:focus {
-  background: rgba(14, 165, 233, 0.15);
-  color: #0ea5e9;
-  text-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
-  transform: scale(1.05);
-}
 
 .hero h1 {
   font-size: 3rem;
@@ -328,23 +295,6 @@ footer .socials {
   margin-top: 1rem;
 }
 
-/* Responsive */
-nav {
-  position: sticky;
-  top: 0;
-  background: transparent;
-  color: #1e293b;
-  backdrop-filter: blur(8px);
-  padding: 1rem 2rem;
-  z-index: 2000;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
-  border-radius: 16px;
-}
 
 
 #particles-js {
@@ -497,11 +447,42 @@ body.dark-mode .hero p {
   opacity: 1;
   transform: none;
 }
-nav a.active {
-  background: rgba(14, 165, 233, 0.15);
-  color: #0ea5e9;
-  border-bottom: 2px solid #0ea5e9;
-  font-weight: 700;
+
+/* --------- Sticky, Blurred Navigation --------- */
+.main-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 0.75rem 2rem;
+  transition: background 0.3s ease;
+}
+
+.main-nav .menu-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav .menu-list li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.main-nav .menu-list li a:hover,
+.main-nav .menu-list li a.active {
+  background: var(--primary-color);
+  color: #ffffff;
 }
 /* Welcome section - alignement et style harmonisé */
 #welcome {
@@ -642,10 +623,46 @@ body.dark-mode .counter-label {
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 10008;
 }
+
+/* --- Agrandissement du panneau Aurion pour plus de contenu --- */
+.aurion-panel {
+  /* largeur plus grande, max 90% sur petits écrans */
+  width: 400px;
+  max-width: 90%;
+  /* hauteur fixe pour contenir plusieurs bulles */
+  height: 500px;
+  /* passe en container flex vertical pour gérer le scroll du corps */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.aurion-body {
+  /* prends tout l’espace restant entre header et input */
+  flex: 1;
+  overflow-y: auto;
+  /* facultatif : un peu d’espacement intérieur */
+  padding: 0.5rem 0;
+}
+
+/* Ajuste la zone de saisie en bas pour rester visible */
+.chat-input {
+  flex-shrink: 0;
+}
+
+/* Si tu veux augmenter encore, joue sur width/height */
+
 .aurion-panel.show {
   transform: translateY(0);
   opacity: 1;
 }
+
+/* Aurion display toggles */
+.aurion-panel.hidden { display: none !important; }
+.aurion-panel.show   { display: block !important; }
+
+.aurion-overlay      { display: none !important; } 
+.aurion-overlay.show { display: block !important; }
 
 /* Dark mode override for Aurion panel */
 body.dark-mode .aurion-panel {
@@ -653,6 +670,98 @@ body.dark-mode .aurion-panel {
   color: var(--text-light);
   border-color: #3b82f6;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Texte blanc pour Aurion en mode sombre */
+body.dark-mode .chat-message.user,
+body.dark-mode .chat-message.bot {
+  color: #ffffff !important;
+}
+body.dark-mode .chat-input input {
+  color: #ffffff;
+  background: #1e293b;
+  border-color: #3b82f6;
+}
+/* --- Aurion Chat Bubbles & Layout --- */
+.aurion-body {
+  display: flex;
+  flex-direction: column;
+  height: 320px; /* Total panel height minus header */
+}
+
+.chat-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background: var(--primary-color);
+  color: #ffffff;
+  border-radius: 1rem 1rem 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  max-width: 80%;
+  position: relative;
+}
+.chat-message.bot {
+  align-self: flex-start;
+  background: rgba(0,0,0,0.05);
+  color: var(--text-dark);
+  border-radius: 1rem 1rem 1rem 0.5rem;
+  padding: 0.5rem 1rem;
+  max-width: 80%;
+  position: relative;
+}
+
+.chat-message .timestamp {
+  display: block;
+  font-size: 0.65rem;
+  color: rgba(0,0,0,0.4);
+  margin-top: 0.25rem;
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.chat-input input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 20px;
+  font-size: 0.95rem;
+  margin-right: 0.5rem;
+}
+.chat-input button {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chat-input button:hover {
+  background: #0284c7;
 }
 /* Options select styles */
 .options-select label {
@@ -818,201 +927,57 @@ body.menu-open #page-content {
     0 0 15px #7c3aed,
     0 0 20px #8b5cf6;
 }
-/* --------- NAV & BURGER MENU --------- */
 
-/* Desktop: show menu horizontally, hide burger */
-.menu-toggle {
-  display: none;
-}
-.menu-list {
-  transform: translateX(0);
-  display: flex;
-  gap: var(--menu-gap);
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Mobile: hide menu, show burger button */
-/* Style des liens dans le menu burger en version mobile */
+/* -------------------------------------------------
+   Force menu horizontal sur mobile (annule le burger)
+--------------------------------------------------- */
 @media (max-width: 768px) {
-  #main-menu.show {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding-top: 100px;
-    background: rgba(0, 0, 0, 0.8); /* ou ton thème */
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9998;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    animation: slideDownFade 0.4s ease-out;
+  /* On masque le bouton burger */
+  .menu-toggle {
+    display: none !important;
   }
+
+  /* On affiche toujours la liste de nav en ligne */
   .menu-list {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: row !important;
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: transparent !important;
+    height: auto !important;
+    gap: var(--menu-gap);
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  #main-menu a {
-    font-size: 1.3rem;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-    border-radius: 8px;
-    transition: background 0.2s ease;
-  }
-
-  #main-menu a:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .menu-overlay.show {
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  /* Animation progressive des liens du menu mobile */
-  #main-menu.show a {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInMenuLink 0.4s ease forwards;
-  }
-
-  #main-menu.show a:nth-child(1) { animation-delay: 0.1s; }
-  #main-menu.show a:nth-child(2) { animation-delay: 0.2s; }
-  #main-menu.show a:nth-child(3) { animation-delay: 0.3s; }
-  #main-menu.show a:nth-child(4) { animation-delay: 0.4s; }
-  #main-menu.show a:nth-child(5) { animation-delay: 0.5s; }
-
-  @keyframes fadeInMenuLink {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideDownFade {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* On désactive l’overlay mobile */
+  .menu-overlay {
+    display: none !important;
   }
 }
 
-.aurion-popup {
-  position: fixed;
-  bottom: 100px;
-  right: 20px;
-  width: 280px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  color: white;
-  font-family: 'Orbitron', sans-serif;
-  z-index: 9999;
-  animation: fadeSlideUp 0.4s ease-out forwards;
+/* Suggestions rapides dans Aurion */
+.aurion-suggestions {
+  background: rgba(14,165,233,0.05);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
 }
-
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.aurion-popup .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 20px;
+.aurion-suggestions .suggestion {
+  background: var(--primary-color);
   color: #fff;
-  background: rgba(255,255,255,0.1);
   border: none;
-  border-radius: 50%;
-  padding: 0.2rem 0.5rem;
-  transition: background 0.3s ease;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-
-.aurion-popup .close-btn:hover {
-  background: rgba(255,255,255,0.3);
-}
-/* ----------- MENU LIST STYLING (Burger/Responsive) ----------- */
-.menu-list li {
-  margin: 1.5rem 0;
-  text-align: center;
-}
-
-.menu-list a {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  color: var(--text-dark);
-  transition: background 0.3s ease;
-}
-
-/* Les liens vides seront gérés dynamiquement via JS si nécessaire */
-
-.menu-list a:hover,
-.menu-list a.active {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-}
-
-/* Show nav links with fade-in animation when menu is open */
-.menu-list.show a {
-  opacity: 1;
-  pointer-events: auto;
-  animation: fadeInMenu 0.4s ease forwards;
-}
-
-@keyframes fadeInMenu {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-body.dark-mode .menu-list {
-  background: #1e293b;
-}
-
-body.dark-mode .menu-list a {
-  color: #93c5fd;
-}
-
-body.dark-mode .menu-list a:hover {
-  background: rgba(147, 197, 253, 0.1);
-}
-
-.aurion-popup.hidden {
-  display: none !important;
-}
-/* Force Aurion to hide when menu is open */
-body.menu-open .aurion-panel.show {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transform: translateY(20px) !important;
+.aurion-suggestions .suggestion:hover {
+  background: #0284c7;
 }
