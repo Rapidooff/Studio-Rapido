@@ -116,49 +116,32 @@ function initDarkMode() {
 function initBurgerMenu() {
   const burger = document.getElementById('menu-toggle');
   const menu = document.getElementById('main-menu');
-  menu && menu.setAttribute('role', 'menu');
   const overlay = document.getElementById('menu-overlay');
-  const pageContent = document.getElementById('page-content');
-  if (!burger || !menu) return;
 
+  // Fonctions d’ouverture et de fermeture du menu
+  function openMenu() {
+    menu.classList.add('show');
+    overlay.classList.add('show');
+    burger.textContent = '✖';
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+  }
   function closeMenu() {
-    burger.classList.remove('open');
-    burger.textContent = '☰';
     menu.classList.remove('show');
-    overlay && overlay.classList.remove('show');
-    document.body.classList.remove('menu-open');
+    overlay.classList.remove('show');
+    burger.textContent = '☰';
     burger.setAttribute('aria-expanded', 'false');
-    document.querySelector('.aurion-popup')?.classList.remove('hidden');
-    if (pageContent) {
-      pageContent.classList.remove('hidden');
-      pageContent.classList.add('visible');
-    }
+    document.body.classList.remove('menu-open');
   }
 
-  burger.setAttribute('aria-controls', 'main-menu');
-  burger.setAttribute('aria-expanded', 'false');
-
-  burger.addEventListener('click', () => {
-    if (window.innerWidth > 768) return;
-    const open = menu.classList.toggle('show');
-    burger.classList.toggle('open', open);
-    burger.textContent = open ? '✖' : '☰';
-    burger.setAttribute('aria-expanded', open.toString());
-    document.body.classList.toggle('menu-open', open);
-    overlay && overlay.classList.toggle('show', open);
-    document.querySelector('.aurion-popup')?.classList.toggle('hidden', open);
-    if (pageContent) {
-      pageContent.classList.toggle('hidden', open);
-      pageContent.classList.toggle('visible', !open);
-    }
-    if (open) window.scrollTo({ top: 0 });
+  // Gestion des clics
+  burger.addEventListener('click', e => {
+    e.stopPropagation();
+    if (menu.classList.contains('show')) closeMenu();
+    else openMenu();
   });
-
   overlay && overlay.addEventListener('click', closeMenu);
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  window.addEventListener('resize', debounce(() => {
-    if (window.innerWidth > 768) closeMenu();
-  }, 200));
 }
 
 // 7. Aurion Notification Timer and Chat
