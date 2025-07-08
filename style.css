@@ -937,6 +937,31 @@ body.menu-open #page-content {
     display: none !important;
   }
 
+  .main-nav {
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 2px solid var(--primary-color);
+  }
+
+  .main-nav .menu-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .main-nav .menu-list li a {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(14, 165, 233, 0.1);
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  .main-nav .menu-list li a:hover {
+    background: var(--primary-color);
+    color: #fff;
+  }
+ 
   /* On affiche toujours la liste de nav en ligne */
   .menu-list {
     display: flex !important;
@@ -981,3 +1006,76 @@ body.menu-open #page-content {
 .aurion-suggestions .suggestion:hover {
   background: #0284c7;
 }
+
+/* Améliorations visuelles supplémentaires pour Aurion */
+.aurion-panel {
+  backdrop-filter: blur(8px) saturate(150%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(226,232,240,0.9));
+}
+
+body.dark-mode .aurion-panel {
+  background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(30,41,59,0.9));
+}
+
+.chat-message.user,
+.chat-message.bot {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chat-message.user::before {
+  content: "👤 ";
+  font-size: 0.9rem;
+  margin-right: 0.2rem;
+}
+
+.chat-message.bot::before {
+  content: "🤖 ";
+  font-size: 0.9rem;
+  margin-right: 0.2rem;
+}
+
+.aurion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(14,165,233,0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.aurion-header h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.aurion-header .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.aurion-header .close-btn:hover {
+  color: #0ea5e9;
+}
+
+.chat-input input::placeholder {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.chat-input button {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+body.dark-mode .chat-message.bot {
+  background: rgba(255, 255, 255, 0.08);
+}
+/* Force update - Aurion visual tweak */
+/* 🔄 Commit déclenché - Sync Aurion design */

@@ -1,3 +1,4 @@
+// Base de questions/réponses locales par mots-clés
 // Base de questions/réponses locales
 const faqMapping = {
   "quels services proposez-vous": 
@@ -18,8 +19,33 @@ const faqMapping = {
     "Raphaël Haddad, c’est moi ! Je crée des expériences web stylées, animées et intégrant de l’IA sur mesure.",
   "qui est raphaël":
     "Raphaël Haddad est un développeur web et IA basé en Île-de-France, fondateur de Studio Rapido."
-  // … ajoute d’autres paires selon tes besoins …
 };
+const faqKeywords = [
+  {
+    keywords: ["services", "proposez", "propositions", "offres"],
+    answer: "Studio Rapido propose des sites vitrines, e‑commerce, prototypes iOS, intégration d’IA sur-mesure, animations Web et refontes UX/UI."
+  },
+  {
+    keywords: ["délais", "livraison", "temps", "délai"],
+    answer: "Nos délais vont de 2 jours pour un site simple à 2 semaines pour un projet complet avec IA et animations avancées."
+  },
+  {
+    keywords: ["devis", "demander", "commande"],
+    answer: "Clique sur “Demander un devis”, choisis ta formule et ajoute tes options. Tu recevras un email récapitulatif immédiatement."
+  },
+  {
+    keywords: ["site vitrine", "présentation", "présenter", "mini site"],
+    answer: "Un site vitrine est une présence web de 1 à 6 pages, idéale pour présenter ton activité ou ton portfolio."
+  },
+  {
+    keywords: ["technologies", "tech", "langages", "outils"],
+    answer: "Nous utilisons HTML5, CSS3, JavaScript (ES6+), animations ScrollReveal et intégrons des IA via l’API OpenAI ou des solutions locales LLaMA."
+  },
+  {
+    keywords: ["raphaël", "raphael", "haddad", "fondateur", "créateur", "studio rapido"],
+    answer: "Raphaël Haddad est le fondateur de Studio Rapido, passionné de web, design et IA basé en Île-de-France."
+  }
+];
 
 // Utility: debounce function
 function debounce(fn, delay) {
@@ -170,12 +196,12 @@ function initAurion() {
     appendMessage('user', text);
     chatInput.value = '';
 
-    // --- Réponse instantanée depuis la base FAQ ---
-    const key = Object.keys(faqMapping).find(k =>
-      text.toLowerCase().includes(k)
+    // --- Réponse instantanée depuis la base FAQ par mots-clés ---
+    const match = faqKeywords.find(entry =>
+      entry.keywords.some(k => text.toLowerCase().includes(k))
     );
-    if (key) {
-      appendMessage('bot', faqMapping[key]);
+    if (match) {
+      appendMessage('bot', match.answer);
       return;
     }
 
@@ -304,3 +330,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initDarkMode();
   initFormRedirect();
 });
+// Update triggered - Aurion logic synced
+// 🔄 Commit déclenché - Sync Aurion logique
