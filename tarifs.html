@@ -175,15 +175,25 @@
   <div id="loader"><div class="spinner"></div></div>
   <header>
     <button id="darkModeToggle" style="margin-left: 1rem;">🌓</button>
-    <nav class="main-nav">
-      <ul id="main-menu" class="menu-list">
-        <li><a href="index.html">🏠 Accueil</a></li>
-        <li><a href="a-propos.html">ℹ️ À propos</a></li>
-        <li><a href="services.html">🧰 Services</a></li>
-        <li><a href="portfolio.html">🖼️ Portfolio</a></li>
-        <li><a href="tarifs.html" class="active">💰 Tarifs</a></li>
-        <li><a href="contact.html">📞 Contact & Devis</a></li>
-      </ul>
+    <nav>
+      <div id="mySidenav" class="sidenav">
+        <a id="closeBtn" href="#" class="close">×</a> 
+        <ul>
+          <li><a href="index.html">🏠 Accueil</a></li>
+          <li><a href="a-propos.html">ℹ️ À propos</a></li>
+          <li><a href="services.html">🧰 Services</a></li>
+          <li><a href="portfolio.html">🖼️ Portfolio</a></li>
+          <li><a href="tarifs.html" class="active">💰 Tarifs</a></li>
+          <li><a href="contact.html">📞 Contact & Devis</a></li>
+        </ul>
+      </div>
+      <a href="#" id="openBtn">
+        <span class="burger-icon">
+          <span></span>
+          <span></span> 
+          <span></span>
+        </span>
+      </a>
     </nav>
   </header>
 

@@ -332,3 +332,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // Update triggered - Aurion logic synced
 // 🔄 Commit déclenché - Sync Aurion logique
+var sidenav = document.getElementById("mySidenav");
+var openBtn = document.getElementById("openBtn");
+var closeBtn = document.getElementById("closeBtn");
+
+openBtn.onclick = openNav;
+closeBtn.onclick = closeNav;
+
+// Ouvre le menu burger
+function openNav() {
+  sidenav.classList.add("active");
+}
+
+// Ferme le menu burger
+function closeNav() {
+  sidenav.classList.remove("active");
+}
