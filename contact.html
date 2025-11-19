@@ -36,8 +36,16 @@
     }
 
     .contact-highlights li::before {
-      content: "✅";
+      content: "";
       margin-right: 0.5rem;
+    }
+    .contact-highlights a {
+      color: var(--text-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .contact-highlights a:hover {
+      text-decoration: underline;
     }
 
     .contact-form {
@@ -112,11 +120,19 @@
     <div class="contact-wrapper">
       <div class="contact-info">
         <h2>📞 Me Contacter</h2>
-        <p>Tu veux lancer un projet, poser une question ou juste me faire un coucou ? Laisse-moi un message et je te répondrai rapidement avec toute l’attention que ton idée mérite.</p>
+        <p>Tu veux lancer un projet, collaborer ou juste échanger ? Écris-moi ici ou passe directement par mes réseaux sociaux — je réponds très vite.</p>
         <ul class="contact-highlights">
           <li>✔️ Réponse sous 24h garantie</li>
           <li>✔️ Devis personnalisé sans engagement</li>
           <li>✔️ Création rapide et sur-mesure</li>
+        </ul>
+        <h3 style="margin-top:1.5rem;">🌐 Mes réseaux sociaux</h3>
+        <ul class="contact-highlights">
+          <li><a href="https://www.instagram.com/studio.rapido" target="_blank">📸 Instagram — rapidooff5</a></li>
+          <li><a href="https://www.tiktok.com/@studio.rapido" target="_blank">🎵 TikTok — @rapidooff5</a></li>
+          <li><a href="https://www.youtube.com/@rapidooff5" target="_blank">▶️ YouTube — rapidooff55</a></li>
+          <li><a href="https://www.twitch.tv/rapidooff5" target="_blank">🎮 Twitch — rapidooff5</a></li>
+          <li><a href="https://twitter.com/studiorapido" target="_blank">🐦 X (Twitter) — rapidooff5</a></li>
         </ul>
       </div>
       <form action="https://formspree.io/f/manjabor" method="POST" class="contact-form">

@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio - Studio Rapido</title>
+  <title>Portfolio – Studio Rapido | Réalisations & univers</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
   <div id="particles-js"></div>
@@ -29,14 +37,41 @@
 
   <section id="portfolio">
     <h2>🖼️ Mon Portfolio</h2>
-    <p>Plonge dans l’univers visuel de Studio Rapido. Chaque projet que je réalise est le fruit d’une réflexion poussée, d’un design sur-mesure et d’une exécution technique rigoureuse. Mon portfolio illustre mes compétences en développement web, design interactif, animations dynamiques et intégration d’intelligences artificielles adaptées aux besoins spécifiques de chaque client.</p>
-    <p>Découvre comment j’ai transformé des idées en expériences digitales uniques, en alliant esthétisme, performance et innovation.</p>
-    <div class="project">
-      <h3>🌐 Univers Rapido</h3>
-      <p>Premier site web que j’ai conçu, mêlant passion, apprentissage et univers personnel. Il marque le début de mon aventure dans la création digitale.</p>
-      <a href="https://rapidooff.github.io/universrapido/" target="_blank" class="project-link">🚀 Voir le site</a>
+    <p>
+      Bienvenue dans l’univers de Studio Rapido. Ici, je rassemble les projets qui mêlent ce que je fais de mieux : 
+      sites web animés, identités visuelles propres, univers de créateurs de contenu et interfaces modernes.
+    </p>
+    <p>
+      Chaque réalisation est pensée pour être concrète : un site qui donne confiance, des visuels cohérents sur tous les réseaux, 
+      et une expérience utilisateur qui donne envie de rester, cliquer et revenir.
+    </p>
+    <div class="project-grid">
+      <div class="project">
+        <h3>🌐 Univers Rapido</h3>
+        <p>Premier site web que j’ai conçu, mêlant passion, apprentissage et univers personnel. Il marque le début de mon aventure dans la création digitale.</p>
+        <a href="https://rapidooff.github.io/universrapido/" target="_blank" class="project-link">🚀 Voir le site</a>
+      </div>
+      <div class="project">
+        <h3>🛰️ Studio Rapido – Site vitrine</h3>
+        <p>Mon site professionnel actuel, pensé comme un vrai studio digital : positionnement clair, sections structurées, dark mode, animations et expérience fluide.</p>
+        <a href="index.html" class="project-link">👀 Voir la version en ligne</a>
+      </div>
+      <div class="project">
+        <h3>🎮 Overlays & scènes Twitch</h3>
+        <p>Création d’overlays, panneaux et visuels pour les streams : scènes de gameplay, intermissions, écran de fin, le tout cohérent avec l’identité du créateur.</p>
+        <p style="font-size:0.9rem; opacity:0.8;">(Sélection d’aperçus en préparation)</p>
+      </div>
+      <div class="project">
+        <h3>🤖 Interfaces IA & assistants numériques</h3>
+        <p>Maquettes d’interfaces pour assistants type Jarvis / Aurion : écrans futuristes, dashboards, HUD et pages de présentation d’IA intégrée.</p>
+        <p style="font-size:0.9rem; opacity:0.8;">(Prototypes en cours de mise en forme pour le portfolio)</p>
+      </div>
+      <div class="project">
+        <h3>📱 Templates & sections réutilisables</h3>
+        <p>Sections d’accueil, blocs de services, footers et composants responsives que je réutilise et adapte pour gagner du temps tout en gardant un rendu pro.</p>
+        <p style="font-size:0.9rem; opacity:0.8;">(Démonstrations interactives à venir)</p>
+      </div>
     </div>
-    <p>(Galerie à venir)</p>
   </section>
 
   <footer class="site-footer">

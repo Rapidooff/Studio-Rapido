@@ -2,7 +2,7 @@
 function animateCounter(el) {
   const target = parseInt(el.dataset.target);
   let count = 0;
-  const speed = target / 60;
+  const speed = Math.max(target / 75, 1);
 
   const update = () => {
     count += speed;
@@ -46,6 +46,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Animation fade-in pour les sections (style créateur / Gen Z)
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+
+  const reveal = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+        reveal.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(sec => {
+    sec.style.opacity = "0";
+    sec.style.transform = "translateY(40px)";
+    sec.style.transition = "opacity 0.7s ease-out, transform 0.7s ease-out";
+    reveal.observe(sec);
+  });
+});
+
 // Empêche le rechargement de la page d'accueil si on clique sur le lien "Accueil"
 document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', (e) => {
@@ -57,13 +79,12 @@ document.querySelectorAll('nav a').forEach(link => {
   });
 });
 
-// Gestion du thème clair/sombre
+// Gestion du thème sombre (nouvelle version)
 document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('darkModeToggle');
   if (toggleButton) {
     toggleButton.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
-      document.body.classList.toggle('light-mode');
     });
   }
 });

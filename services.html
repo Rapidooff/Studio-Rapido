@@ -3,7 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services - Studio Rapido</title>
+  <title>Services – Studio Rapido | Sites web, identité visuelle & créateurs de contenu</title>
+  <style>
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: rgba(15, 23, 42, 0.05);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    .service-card h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+    }
+    .service-card ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .service-card ul li::before {
+      content: "• ";
+      color: #38bdf8;
+      font-weight: bold;
+    }
+    body.dark-mode .service-card {
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+  </style>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
@@ -28,16 +61,46 @@
   </header>
 
   <section id="services">
-    <h2>🧰 Nos Services sur-mesure</h2>
-    <p>Studio Rapido t’accompagne avec des solutions créatives et puissantes adaptées à chaque niveau de projet. Voici ce que tu peux demander dans ton devis :</p>
-    <ul class="services-list">
-      <li>🌐 Création de site vitrine (1 à 5 pages) responsive et design personnalisé</li>
-      <li>🖌️ UI/UX design sur-mesure avec animations visuelles (scroll, particules…)</li>
-      <li>⚙️ Intégration de formulaires interactifs, blog, et newsletter</li>
-      <li>🔍 Optimisation SEO pour être bien référencé sur Google</li>
-      <li>🤖 Développement de fonctionnalités avancées (IA, chatbot, API, Firebase…)</li>
-      <li>🧠 Conseil et accompagnement personnalisé (1 à 3 mois)</li>
-    </ul>
+    <h2>🧰 Nos Services</h2>
+    <p>
+      Studio Rapido propose trois pôles clairs : sites web, identité visuelle et accompagnement pour créateurs de contenu.
+      Chaque service est pensé pour être concret, efficace et aligné avec ton image.
+    </p>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>🌐 Sites web & landing pages</h3>
+        <ul>
+          <li>Site vitrine moderne (1 à 5 pages)</li>
+          <li>Design animé & responsive</li>
+          <li>Formulaires, contact, liens sociaux</li>
+          <li>SEO de base pour être visible</li>
+          <li>Intégration blog / sections dynamiques</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <h3>🎨 Identité visuelle & branding</h3>
+        <ul>
+          <li>Logo simple et propre</li>
+          <li>Palette de couleurs + typographies</li>
+          <li>Visuels réseaux (Instagram, TikTok, YouTube, X)</li>
+          <li>Bannières / headers / miniatures</li>
+          <li>Overlays Twitch & YouTube</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <h3>📹 Créateurs de contenu</h3>
+        <ul>
+          <li>Page de présentation créateur (link page + mini site)</li>
+          <li>Pack miniatures YouTube personnalisées</li>
+          <li>Graphismes de stream (scènes & panneaux)</li>
+          <li>Optimisation profil + conseils ligne éditoriale</li>
+          <li>Accompagnement 1 à 2 mois si besoin</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <footer class="site-footer">
